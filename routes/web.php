@@ -457,6 +457,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/system/release-readiness/trigger-backup', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'triggerBackup'])->name('system.release_readiness.trigger_backup');
     Route::post('api/system/release-readiness/flush-cache-warmup', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'flushCacheWarmup'])->name('system.release_readiness.flush_cache_warmup');
     Route::post('api/system/release-readiness/simulate-workflows', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'simulateWorkflows'])->name('system.release_readiness.simulate_workflows');
+    Route::post('api/system/release-readiness/telephony-stress-test', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'runTelephonyStressTest'])->name('system.release_readiness.telephony_stress_test');
 
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');

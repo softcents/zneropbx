@@ -241,4 +241,28 @@ class ReleaseReadinessController extends Controller
             'message' => 'All 7 multi-domain enterprise workflows executed and verified successfully.',
         ]);
     }
+
+    /**
+     * Run on-demand live FreeSWITCH telephony stress test.
+     */
+    public function runTelephonyStressTest(
+        Request $request,
+        \App\Services\Telecom\LiveTelephonyStressTestService $stressTestService
+    ) {
+        $validated = $request->validate([
+            'calls' => 'nullable|integer|min:1|max:100',
+            'concurrency' => 'nullable|integer|min:1|max:20',
+            'duration' => 'nullable|integer|min:1|max:10',
+            'cleanup' => 'nullable|boolean',
+        ]);
+
+        $calls = $validated['calls'] ?? 10;
+        $concurrency = $validated['concurrency'] ?? 3;
+        $duration = $validated['duration'] ?? 2;
+        $cleanup = $validated['cleanup'] ?? false;
+
+        $result = $stressTestService->executeStressTest($calls, $concurrency, $duration, $cleanup);
+
+        return response()->json($result);
+    }
 }

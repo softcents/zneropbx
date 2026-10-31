@@ -444,6 +444,81 @@
               {{ simulatingWorkflows ? 'Simulating 7 Workflows...' : 'Run Workflow Simulation' }}
             </button>
           </div>
+
+          <div class="rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-200 space-y-3 md:col-span-2 lg:col-span-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-50 text-emerald-600">
+                  <PhoneArrowUpRightIcon class="h-6 w-6" />
+                </span>
+                <div>
+                  <h4 class="text-sm font-bold text-gray-900">FreeSWITCH Live Telephony Stress Test &amp; CDR Fidelity Check</h4>
+                  <p class="text-xs text-gray-500">Carrier-grade concurrent channel load generator with PostgreSQL 17 transaction verification</p>
+                </div>
+              </div>
+              <button
+                @click="runTelephonyStressTest"
+                :disabled="runningStressTest"
+                class="rounded-lg bg-emerald-600 px-4 py-2 text-xs font-semibold text-white hover:bg-emerald-500 transition disabled:opacity-50 flex items-center gap-2"
+              >
+                <ArrowPathIcon v-if="runningStressTest" class="h-4 w-4 animate-spin" />
+                {{ runningStressTest ? 'Dispatching FreeSWITCH Channels...' : 'Execute Live Telephony Load Test (10 Calls)' }}
+              </button>
+            </div>
+            <p class="text-xs text-gray-600">
+              Dispatches parallel non-blocking <code class="font-mono bg-gray-100 px-1 rounded">bgapi originate</code> media channels across FreeSWITCH ESL, monitors peak concurrent sessions, and mathematically verifies 100% CDR ingestion fidelity in PostgreSQL <code class="font-mono bg-gray-100 px-1 rounded">v_xml_cdr</code>.
+            </p>
+          </div>
+        </div>
+
+        <!-- Live Telephony Load Test Results Card -->
+        <div v-if="telephonyResults" class="mt-6 overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-gray-200">
+          <div class="border-b border-gray-200 px-6 py-4 flex items-center justify-between bg-slate-50">
+            <div class="flex items-center gap-2">
+              <PhoneArrowUpRightIcon class="h-5 w-5 text-emerald-600" />
+              <h3 class="text-sm font-bold text-gray-900">Live Telephony Stress Test Results</h3>
+              <span class="ml-2 inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
+                {{ telephonyResults.telephony_rating }}
+              </span>
+            </div>
+            <span class="text-xs text-gray-500 font-mono">Executed at {{ new Date(telephonyResults.generated_at).toLocaleTimeString() }}</span>
+          </div>
+
+          <div class="p-6 grid grid-cols-2 md:grid-cols-4 gap-4 bg-white border-b border-gray-100">
+            <div class="rounded-lg bg-slate-50 p-4 ring-1 ring-slate-200/60">
+              <span class="text-xs font-medium text-gray-500">Call Setup Success Rate</span>
+              <p class="text-xl font-extrabold text-emerald-600">{{ telephonyResults.summary.call_setup_success_rate_pct }}%</p>
+              <span class="text-[11px] text-gray-400 font-mono">{{ telephonyResults.summary.successful_dispatches }}/{{ telephonyResults.summary.total_calls_attempted }} calls passed</span>
+            </div>
+            <div class="rounded-lg bg-slate-50 p-4 ring-1 ring-slate-200/60">
+              <span class="text-xs font-medium text-gray-500">Peak Concurrent Channels</span>
+              <p class="text-xl font-extrabold text-indigo-600">{{ telephonyResults.summary.peak_concurrent_channels }} active</p>
+              <span class="text-[11px] text-gray-400 font-mono">Simultaneous Sofia/null</span>
+            </div>
+            <div class="rounded-lg bg-slate-50 p-4 ring-1 ring-slate-200/60">
+              <span class="text-xs font-medium text-gray-500">PostgreSQL CDR Fidelity</span>
+              <p class="text-xl font-extrabold text-emerald-600">{{ telephonyResults.summary.cdr_fidelity_pct }}%</p>
+              <span class="text-[11px] text-gray-400 font-mono">{{ telephonyResults.summary.cdr_records_verified }} records in v_xml_cdr</span>
+            </div>
+            <div class="rounded-lg bg-slate-50 p-4 ring-1 ring-slate-200/60">
+              <span class="text-xs font-medium text-gray-500">Avg Dispatch Latency</span>
+              <p class="text-xl font-extrabold text-amber-600">{{ telephonyResults.summary.avg_dispatch_latency_ms }} ms</p>
+              <span class="text-[11px] text-gray-400 font-mono">Total time: {{ telephonyResults.summary.total_elapsed_time_sec }}s</span>
+            </div>
+          </div>
+
+          <div class="p-6 bg-slate-50">
+            <h4 class="text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Sample Dispatched Channel UUIDs &amp; FreeSWITCH Response</h4>
+            <div class="space-y-1.5 font-mono text-xs">
+              <div v-for="call in telephonyResults.sample_dispatches" :key="call.uuid" class="flex items-center justify-between bg-white px-3 py-1.5 rounded ring-1 ring-gray-200">
+                <span class="text-slate-800 font-semibold">{{ call.uuid }}</span>
+                <div class="flex items-center gap-3">
+                  <span class="text-slate-500">{{ call.latency_ms }} ms</span>
+                  <span class="rounded bg-emerald-50 px-2 py-0.5 text-emerald-700 font-bold text-[10px]">{{ call.status }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Simulated Workflows Telemetry Output Table -->
@@ -560,6 +635,7 @@ import {
   ClipboardDocumentCheckIcon,
   XMarkIcon,
   CpuChipIcon,
+  PhoneArrowUpRightIcon,
 } from '@heroicons/vue/24/outline'
 
 const props = defineProps({
@@ -592,6 +668,25 @@ const creatingSnapshot = ref(false)
 const feedbackMessage = ref('')
 const simulatingWorkflows = ref(false)
 const simulatedWorkflows = ref([])
+const runningStressTest = ref(false)
+const telephonyResults = ref(null)
+
+const runTelephonyStressTest = async () => {
+  runningStressTest.value = true
+  try {
+    const res = await axios.post('/api/system/release-readiness/telephony-stress-test', {
+      calls: 10,
+      concurrency: 3,
+      duration: 2,
+    })
+    telephonyResults.value = res.data
+    feedbackMessage.value = `Live Telephony Load Test completed! Rating: ${res.data.telephony_rating} (CSSR: ${res.data.summary.call_setup_success_rate_pct}%).`
+  } catch (err) {
+    console.error('Telephony stress test failed', err)
+  } finally {
+    runningStressTest.value = false
+  }
+}
 
 const runWorkflowsSimulation = async () => {
   simulatingWorkflows.value = true
