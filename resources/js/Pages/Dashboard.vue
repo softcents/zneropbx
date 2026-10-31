@@ -383,6 +383,9 @@
                                   <a href="/contact-center/routing" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-white hover:bg-white/20 transition">
                                       {{ $t('ACD & Skills') }}
                                   </a>
+                                  <a href="/contact-center/analytics" class="inline-flex items-center gap-1.5 rounded-lg bg-blue-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-blue-600 transition">
+                                      {{ $t('Analytics & SLA') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

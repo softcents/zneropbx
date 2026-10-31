@@ -92,6 +92,13 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 6,
             ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/analytics',
+                'menu_item_title' => __('Analytics & SLA Reports'),
+                'menu_item_link' => '/contact-center/analytics',
+                'menu_item_icon' => null,
+                'menu_item_order' => 7,
+            ],
         ]);
 
         if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Contact Center') || ($top->menu_item_title ?? '') === 'Contact Center')) {

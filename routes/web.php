@@ -356,6 +356,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/routing/queue-policy', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'saveQueuePolicy'])->name('contact_center.routing.queue_policy.save');
     Route::post('api/contact-center/routing/callbacks/{callback}/action', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'callbackAction'])->name('contact_center.routing.callbacks.action');
 
+    // Advanced Contact Center - SLA Intelligence & Analytics
+    Route::get('contact-center/analytics', [\App\Http\Controllers\ContactCenter\AnalyticsController::class, 'index'])->name('contact_center.analytics');
+    Route::get('contact-center/analytics/export', [\App\Http\Controllers\ContactCenter\AnalyticsController::class, 'export'])->name('contact_center.analytics.export');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
