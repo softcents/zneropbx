@@ -465,6 +465,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/system/release-readiness/simulate-workflows', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'simulateWorkflows'])->name('system.release_readiness.simulate_workflows');
     Route::post('api/system/release-readiness/telephony-stress-test', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'runTelephonyStressTest'])->name('system.release_readiness.telephony_stress_test');
 
+    // Reseller & 100% White-Label Studio (SaaS Hierarchy, Multi-Tier Reseller, Sub-Reseller, Custom SMTP & SMS)
+    Route::get('reseller/whitelabel-studio', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'index'])->name('reseller.whitelabel.index');
+    Route::post('reseller/whitelabel/update-profile', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'updateProfile'])->name('reseller.whitelabel.update-profile');
+    Route::post('reseller/whitelabel/upload-asset', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'uploadAsset'])->name('reseller.whitelabel.upload-asset');
+    Route::post('reseller/whitelabel/update-smtp', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'updateSmtp'])->name('reseller.whitelabel.update-smtp');
+    Route::post('reseller/whitelabel/test-smtp', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'testSmtp'])->name('reseller.whitelabel.test-smtp');
+    Route::post('reseller/whitelabel/create-tenant', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'createTenant'])->name('reseller.whitelabel.create-tenant');
+    Route::put('reseller/whitelabel/tenants/{uuid}', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'updateTenant'])->name('reseller.whitelabel.update-tenant');
+    Route::delete('reseller/whitelabel/tenants/{uuid}', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'deleteTenant'])->name('reseller.whitelabel.delete-tenant');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

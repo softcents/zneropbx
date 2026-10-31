@@ -68,9 +68,11 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { router } from "@inertiajs/vue3";
+import { router, usePage } from "@inertiajs/vue3";
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { trans } from '@i18n';
+
+const page = usePage();
 
 const props = defineProps({
     status: String,
@@ -83,7 +85,7 @@ const form = useForm({
     _token: '',
 });
 
-const logoUrl = ref('/storage/logo.png');
+const logoUrl = computed(() => page.props.whitelabel?.logo_url || '/storage/logo.png');
 const isLoading = ref(false);
 const errorMessage = ref(null);
 

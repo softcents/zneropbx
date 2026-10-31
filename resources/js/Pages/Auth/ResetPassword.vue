@@ -99,8 +99,10 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { router } from "@inertiajs/vue3";
+import { router, usePage } from "@inertiajs/vue3";
 import { Head, Link, useForm } from '@inertiajs/vue3';
+
+const page = usePage();
 
 const props = defineProps({
     errors: Object,
@@ -116,7 +118,7 @@ const form = useForm({
     password_confirmation: '',
 });
 
-const logoUrl = ref('/storage/logo.png');
+const logoUrl = computed(() => page.props.whitelabel?.logo_url || '/storage/logo.png');
 const isLoading = ref(false);
 
 

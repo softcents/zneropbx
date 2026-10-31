@@ -212,6 +212,13 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 11,
             ],
+            (object) [
+                'menu_item_uuid' => 'module:/reseller/whitelabel-studio',
+                'menu_item_title' => __('Reseller & White-Label Studio'),
+                'menu_item_link' => '/reseller/whitelabel-studio',
+                'menu_item_icon' => null,
+                'menu_item_order' => 12,
+            ],
         ]);
 
         if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Telecom Cloud') || ($top->menu_item_title ?? '') === 'Telecom Cloud')) {
@@ -222,6 +229,56 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 51,
                 'child_menu' => $telecomPlatformChildren,
+            ]);
+        }
+
+        // Reseller & Multi-tier SaaS studio navigation
+        $resellerChildren = collect([
+            (object) [
+                'menu_item_uuid' => 'module:/reseller/whitelabel-brand',
+                'menu_item_title' => __('White-Label & Brand Identity'),
+                'menu_item_link' => '/reseller/whitelabel-studio?tab=brand',
+                'menu_item_icon' => null,
+                'menu_item_order' => 1,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/reseller/whitelabel-login',
+                'menu_item_title' => __('Custom Login Page Studio'),
+                'menu_item_link' => '/reseller/whitelabel-studio?tab=login',
+                'menu_item_icon' => null,
+                'menu_item_order' => 2,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/reseller/whitelabel-smtp',
+                'menu_item_title' => __('Custom Dedicated SMTP & Email'),
+                'menu_item_link' => '/reseller/whitelabel-studio?tab=smtp',
+                'menu_item_icon' => null,
+                'menu_item_order' => 3,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/reseller/whitelabel-sms',
+                'menu_item_title' => __('SMS Sender ID & Footers'),
+                'menu_item_link' => '/reseller/whitelabel-studio?tab=sms',
+                'menu_item_icon' => null,
+                'menu_item_order' => 4,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/reseller/whitelabel-tenants',
+                'menu_item_title' => __('Sub-Resellers & Tenant Quotas'),
+                'menu_item_link' => '/reseller/whitelabel-studio?tab=tenants',
+                'menu_item_icon' => null,
+                'menu_item_order' => 5,
+            ],
+        ]);
+
+        if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Reseller Studio') || ($top->menu_item_title ?? '') === 'Reseller Studio')) {
+            $menu->push((object) [
+                'menu_item_uuid' => 'module:reseller-studio',
+                'menu_item_title' => __('Reseller Studio'),
+                'menu_item_link' => null,
+                'menu_item_icon' => null,
+                'menu_item_order' => 52,
+                'child_menu' => $resellerChildren,
             ]);
         }
 

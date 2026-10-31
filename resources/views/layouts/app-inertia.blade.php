@@ -4,19 +4,22 @@
 
 <head>
     <meta charset="utf-8"/>
-    <title inertia>{{ isset($title) ? $title . " | " : config('app.name', 'Laravel') }} </title>
+    @php
+        $wl = app(\App\Services\WhiteLabelService::class)->current();
+    @endphp
+    <title inertia>{{ isset($title) ? $title . " | " : ($wl['company_name'] ?? config('app.name', 'Laravel')) }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="{{ config('app.name', 'Laravel') }} Phone System Portal" name="description" />
-    <meta content="{{ config('app.name', 'Laravel') }}" name="{{ config('app.name', 'Laravel') }}" />
+    <meta content="{{ $wl['company_name'] ?? config('app.name', 'Laravel') }} Phone System Portal" name="description" />
+    <meta content="{{ $wl['company_name'] ?? config('app.name', 'Laravel') }}" name="{{ $wl['company_name'] ?? config('app.name', 'Laravel') }}" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta http-equiv="refresh" content="{{ config('session.lifetime') * 60 }}">
 
-    <link rel="apple-touch-icon" sizes="180x180" href="/storage/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/storage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/storage/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ $wl['logo_url'] ?? '/storage/apple-touch-icon.png' }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ $wl['favicon_url'] ?? '/storage/favicon-32x32.png' }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ $wl['favicon_url'] ?? '/storage/favicon-16x16.png' }}">
     <link rel="manifest" href="/storage/site.webmanifest">
     <link rel="mask-icon" href="/storage/safari-pinned-tab.svg" color="#f08439">
-    <link rel="shortcut icon" href="/storage/favicon.ico">
+    <link rel="shortcut icon" href="{{ $wl['favicon_url'] ?? '/storage/favicon.ico' }}">
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-config" content="/storage/browserconfig.xml">
     <meta name="theme-color" content="#ffffff">

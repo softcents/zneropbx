@@ -1,23 +1,27 @@
 <template>
-    <Head :title="$t('Sign in to your account')" />
+    <Head :title="page.props.whitelabel?.company_name ? `${page.props.whitelabel.company_name} | ${headingText}` : $t('Sign in to your account')" />
     <div class="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
-        <div class="sm:mx-auto sm:w-full sm:max-w-md">
-            <img class="mx-auto h-10 w-auto" :src="logoUrl" :alt="$t('Logo')" />
-            <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">{{ $t('Sign in to your account') }}
+        <div class="sm:mx-auto sm:w-full sm:max-w-md text-center">
+            <img class="mx-auto h-12 w-auto max-w-[240px] object-contain" :src="logoUrl" :alt="companyName" />
+            <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                {{ headingText }}
             </h2>
+            <p v-if="subheadingText" class="mt-1 text-sm text-gray-500">
+                {{ subheadingText }}
+            </p>
         </div>
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
-            <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
-                <div v-if="status" class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-[480px]">
+            <div class="bg-white px-6 py-10 shadow-sm ring-1 ring-gray-200 sm:rounded-lg sm:px-10">
+                <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
                     {{ status }}
                 </div>
 
-                <div v-if="errorMessage" class="mb-4 font-medium text-sm text-red-600 dark:text-red-400">
+                <div v-if="errorMessage" class="mb-4 font-medium text-sm text-red-600">
                     {{ errorMessage }}
                 </div>
 
-                <div v-if="page.props.flash.error" class="mb-4 font-medium text-sm text-red-600 dark:text-red-400">
+                <div v-if="page.props.flash.error" class="mb-4 font-medium text-sm text-red-600">
                     {{ page.props.flash.error }}
                 </div>
 
@@ -50,9 +54,8 @@
 
                     <div class="flex items-center justify-end">
                         <div class="text-sm leading-6">
-                            <!-- <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Forgot password?</a> -->
                             <Link :href="links['password-request']"
-                                class=" font-semibold text-indigo-600 hover:text-indigo-500">
+                                class="font-semibold text-indigo-600 hover:text-indigo-500">
                             {{ $t('Forgot your password?') }}
                             </Link>
                         </div>
@@ -60,7 +63,8 @@
 
                     <div>
                         <button @click.prevent="submitForm" type="submit"
-                            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                            :style="{ backgroundColor: accentColor }"
+                            class="flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:opacity-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">
                             <svg v-if="isLoading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
@@ -76,27 +80,43 @@
 
             </div>
 
+            <!-- White-Label Support & Copyright Footer -->
+            <div class="mt-8 text-center space-y-1.5 text-xs text-gray-500">
+                <p v-if="supportEmail">
+                    {{ $t('Need assistance?') }} 
+                    <a :href="'mailto:' + supportEmail" class="font-semibold text-indigo-600 hover:underline">
+                        {{ supportEmail }}
+                    </a>
+                    <span v-if="supportPhone"> • {{ supportPhone }}</span>
+                </p>
+                <p>{{ copyrightText }}</p>
+            </div>
         </div>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
-import { usePage } from '@inertiajs/vue3'
+import { ref, computed } from 'vue';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import { trans } from '@i18n';
 
-const page = usePage()
+const page = usePage();
 
 const props = defineProps({
     errors: Object,
     links: Object,
     status: String,
-})
+});
 
+const companyName = computed(() => page.props.whitelabel?.company_name || 'ZneroPBX');
+const logoUrl = computed(() => page.props.whitelabel?.logo_url || '/storage/logo.png');
+const accentColor = computed(() => page.props.whitelabel?.login_accent_color || '#4f46e5');
+const headingText = computed(() => page.props.whitelabel?.login_heading || trans('Sign in to your account'));
+const subheadingText = computed(() => page.props.whitelabel?.login_subheading || '');
+const supportEmail = computed(() => page.props.whitelabel?.support_email || '');
+const supportPhone = computed(() => page.props.whitelabel?.support_phone || '');
+const copyrightText = computed(() => page.props.whitelabel?.copyright_text || `© ${new Date().getFullYear()} ${companyName.value}. All rights reserved.`);
 
-
-const logoUrl = ref('/storage/logo.png');
 const isLoading = ref(false);
 const errorMessage = ref('');
 
@@ -130,6 +150,4 @@ const submitForm = () => {
             isLoading.value = false; // Reset loading state on error
         });
 };
-
-
 </script>

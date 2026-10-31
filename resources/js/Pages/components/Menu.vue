@@ -253,7 +253,7 @@ const openDomainPanel = () => {
 
 const searchFieldRef = ref(null);
 const searchQuery = ref('');
-const logoUrl = ref('/storage/logo.png');
+const logoUrl = computed(() => page.props.whitelabel?.logo_url || '/storage/logo.png');
 const emit = defineEmits(['reset-filters']);
 
 const selectDomain = async (domainUuid) => {

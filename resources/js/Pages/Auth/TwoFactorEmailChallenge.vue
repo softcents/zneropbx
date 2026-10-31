@@ -85,9 +85,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Head, useForm } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
+import { Head, useForm, usePage } from '@inertiajs/vue3';
 import { trans } from '@i18n';
+
+const page = usePage();
 
 const form = useForm({
     code: '',
@@ -101,7 +103,7 @@ const props = defineProps({
     status: String,
 })
 
-const logoUrl = ref('/storage/logo.png');
+const logoUrl = computed(() => page.props.whitelabel?.logo_url || '/storage/logo.png');
 const isLoading = ref(false);
 const isLoadingNewCode = ref(false);
 const errorMessage = ref(null);

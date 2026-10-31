@@ -57,9 +57,11 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { Head } from '@inertiajs/vue3';
+import { ref, computed } from 'vue';
+import { Head, usePage } from '@inertiajs/vue3';
 import axios from 'axios';
+
+const page = usePage();
 
 const props = defineProps({
     routes: Object,
@@ -69,7 +71,7 @@ const props = defineProps({
     username: String,
 })
 
-const logoUrl = ref('/storage/logo.png');
+const logoUrl = computed(() => page.props.whitelabel?.logo_url || '/storage/logo.png');
 const isLoading = ref(false);
 const hasQR = ref(null);
 const hasPassword = ref(null);

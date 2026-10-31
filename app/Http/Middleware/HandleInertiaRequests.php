@@ -65,6 +65,8 @@ class HandleInertiaRequests extends Middleware
 
             'csrf_token' => csrf_token(),
 
+            'whitelabel' => fn() => app(\App\Services\WhiteLabelService::class)->current(),
+
             'auth' => [
                 'user' => fn() => $request->user() ? [
                     'name'  => $request->user()->name_formatted ?: $request->user()->username,

@@ -28,6 +28,21 @@ abstract class BaseMailable extends Mailable
 
     private function mergeDefaultSettings(array $attributes): array
     {
+        $domainUuid = $attributes['domain_uuid'] ?? session('domain_uuid') ?? null;
+        if ($domainUuid) {
+            $profile = \App\Models\ResellerWhitelabelProfile::where('domain_uuid', $domainUuid)
+                ->where('is_active', true)
+                ->first();
+            if ($profile) {
+                $attributes['app_name'] = $profile->company_name;
+                $attributes['company_name'] = $profile->company_name;
+                if ($profile->support_email) $attributes['support_email'] = $profile->support_email;
+                if ($profile->smtp_from_address) $attributes['from_email'] = $profile->smtp_from_address;
+                if ($profile->smtp_from_name) $attributes['from_name'] = $profile->smtp_from_name;
+                if ($profile->logo_url) $attributes['logo_url'] = $profile->logo_url;
+            }
+        }
+
         $attributes['app_name'] = $attributes['app_name'] ?? config('app.name', 'FS PBX');
         $attributes['product_url'] = $attributes['product_url'] ?? config('app.url', '');
         $settings = DefaultSettings::where('default_setting_category', 'email')->get();
