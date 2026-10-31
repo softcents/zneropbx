@@ -401,6 +401,9 @@
                                   <a href="/billing/financial-studio" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600 transition">
                                       {{ $t('Financial & Tariff Studio') }}
                                   </a>
+                                  <a href="/pbx/advanced-operations" class="inline-flex items-center gap-1.5 rounded-lg bg-cyan-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-cyan-600 transition">
+                                      {{ $t('PBX Fleet & Operations') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

@@ -397,6 +397,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/billing/financial-studio/deposit', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'deposit'])->name('billing.financial_studio.deposit');
     Route::post('api/billing/financial-studio/invoice', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'generateInvoice'])->name('billing.financial_studio.invoice');
 
+    // PBX Advanced Operations, Fleet Governance & Emergency Routing (P4)
+    Route::get('pbx/advanced-operations', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'index'])->name('pbx.advanced_operations');
+    Route::post('api/pbx/advanced-operations/emergency-dispatch', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'testEmergencyDispatch'])->name('pbx.advanced_operations.emergency_dispatch');
+    Route::post('api/pbx/advanced-operations/caller-id-simulate', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'simulateCallerId'])->name('pbx.advanced_operations.caller_id_simulate');
+    Route::post('api/pbx/advanced-operations/permission-evaluate', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'evaluateCallPermission'])->name('pbx.advanced_operations.permission_evaluate');
+    Route::post('api/pbx/advanced-operations/legal-holds/{holdUuid}/toggle', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'toggleLegalHold'])->name('pbx.advanced_operations.legal_hold_toggle');
+    Route::post('api/pbx/advanced-operations/devices/{deviceUuid}/reboot', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'rebootDevice'])->name('pbx.advanced_operations.device_reboot');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
