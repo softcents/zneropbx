@@ -133,6 +133,98 @@ class ModuleMenuItems
             ]);
         }
 
+        // Add Telecom Cloud navigation menu
+        $telecomPlatformChildren = collect([
+            (object) [
+                'menu_item_uuid' => 'module:/telecom/routing-intelligence',
+                'menu_item_title' => __('Telecom Routing & LCR'),
+                'menu_item_link' => '/telecom/routing-intelligence',
+                'menu_item_icon' => null,
+                'menu_item_order' => 1,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/telecom/stir-shaken',
+                'menu_item_title' => __('STIR/SHAKEN Caller Identity'),
+                'menu_item_link' => '/telecom/stir-shaken',
+                'menu_item_icon' => null,
+                'menu_item_order' => 2,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/carrier/infrastructure',
+                'menu_item_title' => __('Carrier Multi-Node Infrastructure'),
+                'menu_item_link' => '/carrier/infrastructure',
+                'menu_item_icon' => null,
+                'menu_item_order' => 3,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/billing/financial-studio',
+                'menu_item_title' => __('Financial Rating & Ledger'),
+                'menu_item_link' => '/billing/financial-studio',
+                'menu_item_icon' => null,
+                'menu_item_order' => 4,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/messaging/sms-voice-studio',
+                'menu_item_title' => __('SMS & Voice Messaging Studio'),
+                'menu_item_link' => '/messaging/sms-voice-studio',
+                'menu_item_icon' => null,
+                'menu_item_order' => 5,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/ai/voice-automation',
+                'menu_item_title' => __('AI Voice & Neural Agents'),
+                'menu_item_link' => '/ai/voice-automation',
+                'menu_item_icon' => null,
+                'menu_item_order' => 6,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/security/fraud-compliance-studio',
+                'menu_item_title' => __('Security & Fraud Radar'),
+                'menu_item_link' => '/security/fraud-compliance-studio',
+                'menu_item_icon' => null,
+                'menu_item_order' => 7,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/analytics/operations-intelligence',
+                'menu_item_title' => __('Operations Intelligence & BI'),
+                'menu_item_link' => '/analytics/operations-intelligence',
+                'menu_item_icon' => null,
+                'menu_item_order' => 8,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/api-ecosystem/developer-portal',
+                'menu_item_title' => __('Developer Portal & HMAC Webhooks'),
+                'menu_item_link' => '/api-ecosystem/developer-portal',
+                'menu_item_icon' => null,
+                'menu_item_order' => 9,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/pbx/advanced-operations',
+                'menu_item_title' => __('PBX Fleet & E911 Governance'),
+                'menu_item_link' => '/pbx/advanced-operations',
+                'menu_item_icon' => null,
+                'menu_item_order' => 10,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/system/release-readiness',
+                'menu_item_title' => __('Release Readiness Hub'),
+                'menu_item_link' => '/system/release-readiness',
+                'menu_item_icon' => null,
+                'menu_item_order' => 11,
+            ],
+        ]);
+
+        if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Telecom Cloud') || ($top->menu_item_title ?? '') === 'Telecom Cloud')) {
+            $menu->push((object) [
+                'menu_item_uuid' => 'module:telecom-cloud',
+                'menu_item_title' => __('Telecom Cloud'),
+                'menu_item_link' => null,
+                'menu_item_icon' => null,
+                'menu_item_order' => 51,
+                'child_menu' => $telecomPlatformChildren,
+            ]);
+        }
+
         if ($entries->isEmpty()) {
             return $menu;
         }
