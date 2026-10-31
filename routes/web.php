@@ -327,10 +327,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/agent-desktop/disposition', [\App\Http\Controllers\ContactCenter\AgentDesktopController::class, 'submitDisposition'])->name('contact_center.agent_desktop.disposition');
     Route::get('api/contact-center/customer/lookup', [\App\Http\Controllers\ContactCenter\AgentDesktopController::class, 'customerLookup'])->name('contact_center.customer.lookup');
 
-    // Advanced Contact Center - QA Evaluation & Coaching
+    // Advanced Contact Center - QA Evaluation & Conversation Speech Intelligence
     Route::get('contact-center/qa-evaluation', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'index'])->name('contact_center.qa_evaluation');
     Route::post('api/contact-center/qa/evaluate', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'evaluate'])->name('contact_center.qa.evaluate');
     Route::post('api/contact-center/qa/acknowledge', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'acknowledge'])->name('contact_center.qa.acknowledge');
+    Route::get('api/contact-center/speech-intelligence/{xmlCdrUuid}', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'getSpeechIntelligence'])->name('contact_center.speech_intelligence');
 
     // Advanced Contact Center - Workforce Management (WFM) & Adherence
     Route::get('contact-center/workforce-management', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'index'])->name('contact_center.wfm');

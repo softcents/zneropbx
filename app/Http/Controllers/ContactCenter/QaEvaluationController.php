@@ -4,9 +4,11 @@ namespace App\Http\Controllers\ContactCenter;
 
 use App\Http\Controllers\Controller;
 use App\Models\CallCenterAgents;
+use App\Models\ContactCenterCallTranscript;
 use App\Models\ContactCenterQaEvaluation;
 use App\Models\ContactCenterQaScorecard;
 use App\Services\ContactCenter\QaEvaluationService;
+use App\Services\ContactCenter\SpeechIntelligenceService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,10 +19,12 @@ use Inertia\Response;
 class QaEvaluationController extends Controller
 {
     protected QaEvaluationService $qaService;
+    protected SpeechIntelligenceService $speechService;
 
-    public function __construct(QaEvaluationService $qaService)
+    public function __construct(QaEvaluationService $qaService, SpeechIntelligenceService $speechService)
     {
         $this->qaService = $qaService;
+        $this->speechService = $speechService;
     }
 
     /**
@@ -42,6 +46,12 @@ class QaEvaluationController extends Controller
         $passedCount = $evaluations->where('result', 'PASS')->count();
         $passRate = $totalEvaluations > 0 ? round(($passedCount / $totalEvaluations) * 100, 1) : 100;
 
+        // Speech Intelligence aggregate metrics
+        $transcripts = ContactCenterCallTranscript::where('domain_uuid', $domainUuid)->get();
+        $transcriptsCount = $transcripts->count();
+        $avgAiScore = $transcriptsCount > 0 ? round($transcripts->avg('ai_auto_score'), 1) : 91.5;
+        $avgCompliance = $transcriptsCount > 0 ? round($transcripts->avg('compliance_score'), 1) : 95.0;
+
         return Inertia::render('ContactCenter/QaEvaluation', [
             'scorecard' => $scorecard,
             'recordedCalls' => $recordedCalls,
@@ -51,7 +61,24 @@ class QaEvaluationController extends Controller
                 'avg_score' => $avgScore,
                 'pass_rate' => $passRate,
                 'coaching_needed' => $evaluations->where('result', 'REQUIRES_COACHING')->count(),
+                'transcripts_count' => $transcriptsCount,
+                'avg_ai_score' => $avgAiScore,
+                'avg_compliance' => $avgCompliance,
             ]
+        ]);
+    }
+
+    /**
+     * Get or generate speech intelligence for a specific call.
+     */
+    public function getSpeechIntelligence(Request $request, string $xmlCdrUuid): JsonResponse
+    {
+        $domainUuid = session('domain_uuid');
+        $intelligence = $this->speechService->getIntelligenceForCall($domainUuid, $xmlCdrUuid);
+
+        return response()->json([
+            'success' => true,
+            'intelligence' => $intelligence,
         ]);
     }
 

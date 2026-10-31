@@ -4,6 +4,7 @@ namespace App\Services\ContactCenter;
 
 use App\Models\CDR;
 use App\Models\CallCenterAgents;
+use App\Models\ContactCenterCallTranscript;
 use App\Models\ContactCenterQaEvaluation;
 use App\Models\ContactCenterQaScorecard;
 use Carbon\Carbon;
@@ -201,6 +202,9 @@ class QaEvaluationService
      */
     public function getCallsForEvaluation(string $domainUuid, int $limit = 30)
     {
+        // Ensure sample enterprise calls with audio intelligence exist
+        app(SpeechIntelligenceService::class)->ensureSampleCallsWithRecordings($domainUuid);
+
         $cdrs = CDR::where('domain_uuid', $domainUuid)
             ->whereNotNull('record_name')
             ->where('record_name', '!=', '')
@@ -209,8 +213,9 @@ class QaEvaluationService
             ->limit($limit)
             ->get();
 
-        return $cdrs->map(function ($cdr) {
+        return $cdrs->map(function ($cdr) use ($domainUuid) {
             $evaluation = ContactCenterQaEvaluation::where('xml_cdr_uuid', $cdr->xml_cdr_uuid)->first();
+            $transcript = ContactCenterCallTranscript::where('xml_cdr_uuid', $cdr->xml_cdr_uuid)->first();
 
             return [
                 'xml_cdr_uuid' => $cdr->xml_cdr_uuid,
@@ -232,6 +237,14 @@ class QaEvaluationService
                     'result' => $evaluation->result,
                     'status' => $evaluation->status,
                     'coaching_notes' => $evaluation->coaching_notes,
+                ] : null,
+                'transcript' => $transcript ? [
+                    'transcript_uuid' => $transcript->transcript_uuid,
+                    'overall_sentiment' => $transcript->overall_sentiment,
+                    'customer_sentiment_score' => $transcript->customer_sentiment_score,
+                    'ai_auto_score' => $transcript->ai_auto_score,
+                    'compliance_score' => $transcript->compliance_score,
+                    'summary' => $transcript->summary,
                 ] : null,
             ];
         });
