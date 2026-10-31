@@ -550,50 +550,6 @@ class DashboardController extends Controller
             $voicemail = Voicemails::where('domain_uuid',$extension->domain_uuid)->where('voicemail_id',$extension->extension)->first();
         }
 
-        // Advanced Enterprise Contact Center & Supervisor Suite
-        $apps[] = [
-            'name' => __('Supervisor Command Center'),
-            'href' => '/contact-center/supervisor-command-center',
-            'icon' => 'SupportAgent',
-            'slug' => 'supervisor_command_center',
-            'count_label' => __('Live Ops'),
-        ];
-        $apps[] = [
-            'name' => __('Agent Desktop'),
-            'href' => '/contact-center/agent-desktop',
-            'icon' => 'SupportAgent',
-            'slug' => 'agent_desktop',
-            'count_label' => __('Omnichannel'),
-        ];
-        $apps[] = [
-            'name' => __('QA & Coaching'),
-            'href' => '/contact-center/qa-evaluation',
-            'icon' => 'HeartIcon',
-            'slug' => 'qa_coaching',
-            'count_label' => __('Scorecards'),
-        ];
-        $apps[] = [
-            'name' => __('Workforce Management'),
-            'href' => '/contact-center/workforce-management',
-            'icon' => 'ClockIcon',
-            'slug' => 'wfm',
-            'count_label' => __('Erlang-C'),
-        ];
-        $apps[] = [
-            'name' => __('Campaign & Dialer'),
-            'href' => '/contact-center/campaigns',
-            'icon' => 'SupportAgent',
-            'slug' => 'campaign_studio',
-            'count_label' => __('Predictive'),
-        ];
-        $apps[] = [
-            'name' => __('ACD & Skills Routing'),
-            'href' => '/contact-center/routing',
-            'icon' => 'SupportAgent',
-            'slug' => 'acd_routing',
-            'count_label' => __('Skills & SLA'),
-        ];
-
         if (userCheckPermission("extension_view")) {
             $apps[] = ['name' => __('Extensions'), 'href' => route('extensions.index'), 'icon' => 'ContactPhoneIcon', 'slug' => 'extensions'];
         }
