@@ -419,6 +419,9 @@
                                   <a href="/security/fraud-compliance-studio" class="inline-flex items-center gap-1.5 rounded-lg bg-rose-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-rose-600 transition">
                                       {{ $t('Fraud & Security Shield') }}
                                   </a>
+                                  <a href="/analytics/operations-intelligence" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600 transition">
+                                      {{ $t('Operations Intelligence') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

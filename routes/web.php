@@ -445,6 +445,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/security/incidents/{uuid}/resolve', [\App\Http\Controllers\Security\FraudComplianceController::class, 'resolveIncident'])->name('security.incidents.resolve');
     Route::post('api/security/compliance-policy', [\App\Http\Controllers\Security\FraudComplianceController::class, 'updatePolicy'])->name('security.compliance_policy.update');
 
+    // Operations Intelligence & Cross-Domain Analytics Studio (P11)
+    Route::get('analytics/operations-intelligence', [\App\Http\Controllers\Analytics\OperationsIntelligenceController::class, 'index'])->name('analytics.operations_intelligence');
+    Route::post('api/analytics/operations-intelligence/export-report', [\App\Http\Controllers\Analytics\OperationsIntelligenceController::class, 'storeExportJob'])->name('analytics.operations_intelligence.export');
+    Route::post('api/analytics/operations-intelligence/save-view', [\App\Http\Controllers\Analytics\OperationsIntelligenceController::class, 'storeSavedView'])->name('analytics.operations_intelligence.save_view');
+    Route::post('api/analytics/operations-intelligence/forecast-capacity', [\App\Http\Controllers\Analytics\OperationsIntelligenceController::class, 'runCapacityForecast'])->name('analytics.operations_intelligence.forecast');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
