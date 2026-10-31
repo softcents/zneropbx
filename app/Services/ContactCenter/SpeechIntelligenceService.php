@@ -584,7 +584,7 @@ class SpeechIntelligenceService
             $cdrUuid = (string) Str::uuid();
             $callTime = $now->copy()->subMinutes(15 * ($idx + 1));
 
-            CDR::create([
+            \Illuminate\Support\Facades\DB::table('v_xml_cdr')->insert([
                 'xml_cdr_uuid' => $cdrUuid,
                 'domain_uuid' => $domainUuid,
                 'direction' => 'inbound',
@@ -592,11 +592,12 @@ class SpeechIntelligenceService
                 'caller_id_number' => $s['caller_id_number'],
                 'destination_number' => $s['destination_number'],
                 'start_epoch' => $callTime->timestamp,
-                'start_date' => $callTime->toDateTimeString(),
+                'start_stamp' => $callTime->toDateTimeString(),
                 'duration' => $s['duration'],
                 'billsec' => $s['billsec'],
                 'record_name' => $s['record_name'],
                 'record_path' => '/var/lib/freeswitch/recordings/' . $s['record_name'],
+                'insert_date' => $now->toDateTimeString(),
             ]);
 
             // Pre-generate transcript
