@@ -413,6 +413,9 @@
                                   <a href="/ai/voice-automation" class="inline-flex items-center gap-1.5 rounded-lg bg-purple-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-purple-600 transition">
                                       {{ $t('AI Voice Platform') }}
                                   </a>
+                                  <a href="/api-ecosystem/developer-portal" class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-600 transition">
+                                      {{ $t('Developer Portal & APIs') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

@@ -426,6 +426,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/ai/voice-automation/search-knowledge', [\App\Http\Controllers\Ai\VoiceAutomationController::class, 'searchKnowledge'])->name('ai.voice_automation.search_knowledge');
     Route::post('api/ai/voice-automation/agents/{agentUuid}/prompt', [\App\Http\Controllers\Ai\VoiceAutomationController::class, 'updatePrompt'])->name('ai.voice_automation.update_prompt');
 
+    // API, Integration Ecosystem & Developer Portal (P9)
+    Route::get('api-ecosystem/developer-portal', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'index'])->name('api_ecosystem.developer_portal');
+    Route::post('api/ecosystem/credentials', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'storeKey'])->name('api_ecosystem.credentials.store');
+    Route::post('api/ecosystem/credentials/{uuid}/revoke', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'revokeKey'])->name('api_ecosystem.credentials.revoke');
+    Route::post('api/ecosystem/credentials/{uuid}/rotate', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'rotateKeySecret'])->name('api_ecosystem.credentials.rotate');
+    Route::post('api/ecosystem/webhooks', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'storeWebhook'])->name('api_ecosystem.webhooks.store');
+    Route::delete('api/ecosystem/webhooks/{uuid}', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'deleteWebhook'])->name('api_ecosystem.webhooks.delete');
+    Route::post('api/ecosystem/webhooks/{uuid}/test', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'testWebhook'])->name('api_ecosystem.webhooks.test');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
