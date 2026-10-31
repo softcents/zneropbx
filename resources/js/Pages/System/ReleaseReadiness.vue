@@ -240,7 +240,7 @@
               </div>
               <div>
                 <span class="text-gray-500">PHP Runtime:</span>
-                <p class="font-semibold text-gray-900">PHP 8.2 FPM (OPcache JIT Enabled)</p>
+                <p class="font-semibold text-gray-900">PHP 8.4 FPM (OPcache JIT Enabled)</p>
               </div>
               <div>
                 <span class="text-gray-500">Database Engine:</span>

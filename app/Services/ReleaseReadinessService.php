@@ -243,7 +243,7 @@ class ReleaseReadinessService
             [
                 'step' => 3,
                 'title' => 'Cache Warmup & Daemon Reload',
-                'command' => "php artisan optimize:clear\nphp artisan config:cache\nphp artisan route:cache\nsudo systemctl reload nginx php8.2-fpm freeswitch",
+                'command' => "php artisan optimize:clear\nphp artisan config:cache\nphp artisan route:cache\nsudo systemctl reload nginx php8.4-fpm freeswitch",
                 'description' => 'Clear stale bytecode, pre-compile routes and configs, and seamlessly reload Nginx and FreeSWITCH daemons.',
             ],
             [

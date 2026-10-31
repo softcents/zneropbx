@@ -104,7 +104,7 @@ The production readiness suite bundles automated snapshot generation (`/api/syst
   php artisan optimize:clear
   php artisan config:cache
   php artisan route:cache
-  sudo systemctl reload nginx php8.2-fpm freeswitch
+  sudo systemctl reload nginx php8.4-fpm freeswitch
   ```
 - **Step 4: Emergency 1-Click Rollback**
   ```bash
