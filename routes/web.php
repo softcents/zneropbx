@@ -332,6 +332,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/qa/evaluate', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'evaluate'])->name('contact_center.qa.evaluate');
     Route::post('api/contact-center/qa/acknowledge', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'acknowledge'])->name('contact_center.qa.acknowledge');
 
+    // Advanced Contact Center - Workforce Management (WFM) & Adherence
+    Route::get('contact-center/workforce-management', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'index'])->name('contact_center.wfm');
+    Route::get('api/contact-center/wfm/roster', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'getRoster'])->name('contact_center.wfm.roster');
+    Route::post('api/contact-center/wfm/save-schedule', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'saveSchedule'])->name('contact_center.wfm.save_schedule');
+    Route::post('api/contact-center/wfm/calculate-staffing', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'calculateStaffing'])->name('contact_center.wfm.calculate_staffing');
+    Route::get('api/contact-center/wfm/live-adherence', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'liveAdherence'])->name('contact_center.wfm.live_adherence');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
