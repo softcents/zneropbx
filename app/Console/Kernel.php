@@ -207,6 +207,10 @@ class Kernel extends ConsoleKernel
         Commands\ClearExportDirectory::class,
         Commands\VersionSetCommand::class,
         Commands\ConvertDate::class,
+        Commands\VerifyEnterpriseProductionReadiness::class,
+        Commands\SimulateEnterpriseWorkflows::class,
+        Commands\BenchmarkEnterprisePlatform::class,
+        Commands\TelecomLiveStressTest::class,
     ];
 
     protected function commands()

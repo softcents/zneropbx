@@ -95,6 +95,22 @@ class ReleaseReadinessTest extends TestCase
         $this->assertTrue($data['success']);
     }
 
+    public function test_telephony_stress_test_api(): void
+    {
+        $response = $this->actingAs($this->user)->postJson(route('system.release_readiness.telephony_stress_test'), [
+            'calls' => 2,
+            'concurrency' => 2,
+            'duration' => 1,
+            'cleanup' => true,
+        ]);
+
+        $response->assertStatus(200);
+        $data = $response->json();
+        $this->assertTrue($data['success']);
+        $this->assertArrayHasKey('telephony_rating', $data);
+        $this->assertArrayHasKey('summary', $data);
+    }
+
     public function test_artisan_verify_readiness_command(): void
     {
         $this->artisan('enterprise:verify-readiness')
