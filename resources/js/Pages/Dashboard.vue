@@ -404,6 +404,9 @@
                                   <a href="/pbx/advanced-operations" class="inline-flex items-center gap-1.5 rounded-lg bg-cyan-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-cyan-600 transition">
                                       {{ $t('PBX Fleet & Operations') }}
                                   </a>
+                                  <a href="/carrier/infrastructure" class="inline-flex items-center gap-1.5 rounded-lg bg-sky-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-sky-600 transition">
+                                      {{ $t('Carrier Infrastructure') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

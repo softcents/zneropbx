@@ -405,6 +405,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/pbx/advanced-operations/legal-holds/{holdUuid}/toggle', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'toggleLegalHold'])->name('pbx.advanced_operations.legal_hold_toggle');
     Route::post('api/pbx/advanced-operations/devices/{deviceUuid}/reboot', [\App\Http\Controllers\Pbx\AdvancedOperationsController::class, 'rebootDevice'])->name('pbx.advanced_operations.device_reboot');
 
+    // Carrier Infrastructure, Multi-Node FreeSWITCH Topology & Platform Resilience (P6)
+    Route::get('carrier/infrastructure', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'index'])->name('carrier.infrastructure');
+    Route::post('api/carrier/infrastructure/nodes/{nodeUuid}/drain', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'toggleDrain'])->name('carrier.infrastructure.node_drain');
+    Route::post('api/carrier/infrastructure/nodes/{nodeUuid}/ping', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'pingNode'])->name('carrier.infrastructure.node_ping');
+    Route::post('api/carrier/infrastructure/drills/simulate-failover', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'simulateFailover'])->name('carrier.infrastructure.simulate_failover');
+    Route::post('api/carrier/infrastructure/snapshots/create', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'createSnapshot'])->name('carrier.infrastructure.create_snapshot');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
