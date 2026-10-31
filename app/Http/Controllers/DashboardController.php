@@ -579,6 +579,13 @@ class DashboardController extends Controller
             'slug' => 'wfm',
             'count_label' => __('Erlang-C'),
         ];
+        $apps[] = [
+            'name' => __('Campaign & Dialer'),
+            'href' => '/contact-center/campaigns',
+            'icon' => 'SupportAgent',
+            'slug' => 'campaign_studio',
+            'count_label' => __('Predictive'),
+        ];
 
         if (userCheckPermission("extension_view")) {
             $apps[] = ['name' => __('Extensions'), 'href' => route('extensions.index'), 'icon' => 'ContactPhoneIcon', 'slug' => 'extensions'];

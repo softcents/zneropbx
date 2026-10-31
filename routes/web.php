@@ -339,6 +339,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/wfm/calculate-staffing', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'calculateStaffing'])->name('contact_center.wfm.calculate_staffing');
     Route::get('api/contact-center/wfm/live-adherence', [\App\Http\Controllers\ContactCenter\WorkforceManagementController::class, 'liveAdherence'])->name('contact_center.wfm.live_adherence');
 
+    // Advanced Contact Center - Outbound Campaign & Predictive Dialer Studio
+    Route::get('contact-center/campaigns', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'index'])->name('contact_center.campaigns');
+    Route::post('api/contact-center/campaigns', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'store'])->name('contact_center.campaigns.store');
+    Route::post('api/contact-center/campaigns/{campaign}/start', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'start'])->name('contact_center.campaigns.start');
+    Route::post('api/contact-center/campaigns/{campaign}/pause', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'pause'])->name('contact_center.campaigns.pause');
+    Route::post('api/contact-center/campaigns/{campaign}/stop', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'stop'])->name('contact_center.campaigns.stop');
+    Route::post('api/contact-center/campaigns/{campaign}/leads', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'addLeads'])->name('contact_center.campaigns.leads');
+    Route::get('api/contact-center/campaigns/{campaign}/telemetry', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'telemetry'])->name('contact_center.campaigns.telemetry');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
