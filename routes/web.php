@@ -412,6 +412,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/carrier/infrastructure/drills/simulate-failover', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'simulateFailover'])->name('carrier.infrastructure.simulate_failover');
     Route::post('api/carrier/infrastructure/snapshots/create', [\App\Http\Controllers\Carrier\InfrastructureController::class, 'createSnapshot'])->name('carrier.infrastructure.create_snapshot');
 
+    // SMS, Voice SMS & SMPP Gateway Studio (P7)
+    Route::get('messaging/sms-voice-studio', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'index'])->name('messaging.sms_voice_studio');
+    Route::post('api/messaging/sms-voice-studio/send', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'send'])->name('messaging.sms_voice_studio.send');
+    Route::post('api/messaging/sms-voice-studio/calculate-segments', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'calculateSegments'])->name('messaging.sms_voice_studio.calculate_segments');
+    Route::post('api/messaging/sms-voice-studio/connectors/{connectorUuid}/toggle-bind', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'toggleBind'])->name('messaging.sms_voice_studio.toggle_bind');
+    Route::post('api/messaging/sms-voice-studio/dnd', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'addDnd'])->name('messaging.sms_voice_studio.add_dnd');
+    Route::delete('api/messaging/sms-voice-studio/dnd/{suppressionUuid}', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'removeDnd'])->name('messaging.sms_voice_studio.remove_dnd');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
