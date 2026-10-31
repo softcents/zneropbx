@@ -20,13 +20,16 @@ class CheckFusionPBXLogin
         if (Auth::check()) {
             if (session_status() == PHP_SESSION_NONE) {
                 session_start();
-            };
-            if (!isset($_SESSION['user'])) {
-                session_unset();
-                session_destroy();
-        
-                Auth::logout();
-                Session::flush();
+            }
+
+            if (!isset($_SESSION['user']) || empty($_SESSION['user'])) {
+                try {
+                    app(\App\Listeners\SetUpUserSession::class)->handle(
+                        new \Illuminate\Auth\Events\Login('web', Auth::user(), false)
+                    );
+                } catch (\Throwable $e) {
+                    logger('CheckFusionPBXLogin failed to repopulate session: ' . $e->getMessage());
+                }
             }
         }
 

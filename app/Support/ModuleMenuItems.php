@@ -42,11 +42,58 @@ class ModuleMenuItems
             ])
             ->values();
 
-        if ($entries->isEmpty() || ! $menu) {
+        if (! $menu) {
             return $menu;
         }
 
         $menu = collect($menu)->map(fn ($top) => clone $top);
+
+        // Add Contact Center navigation menu
+        $contactCenterChildren = collect([
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/supervisor-command-center',
+                'menu_item_title' => __('Supervisor Command Center'),
+                'menu_item_link' => '/contact-center/supervisor-command-center',
+                'menu_item_icon' => null,
+                'menu_item_order' => 1,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/agent-desktop',
+                'menu_item_title' => __('Agent Desktop'),
+                'menu_item_link' => '/contact-center/agent-desktop',
+                'menu_item_icon' => null,
+                'menu_item_order' => 2,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/qa-evaluation',
+                'menu_item_title' => __('QA & Coaching'),
+                'menu_item_link' => '/contact-center/qa-evaluation',
+                'menu_item_icon' => null,
+                'menu_item_order' => 3,
+            ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/workforce-management',
+                'menu_item_title' => __('Workforce Management (WFM)'),
+                'menu_item_link' => '/contact-center/workforce-management',
+                'menu_item_icon' => null,
+                'menu_item_order' => 4,
+            ],
+        ]);
+
+        if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Contact Center') || ($top->menu_item_title ?? '') === 'Contact Center')) {
+            $menu->push((object) [
+                'menu_item_uuid' => 'module:contact-center',
+                'menu_item_title' => __('Contact Center'),
+                'menu_item_link' => null,
+                'menu_item_icon' => null,
+                'menu_item_order' => 50,
+                'child_menu' => $contactCenterChildren,
+            ]);
+        }
+
+        if ($entries->isEmpty()) {
+            return $menu;
+        }
         $advanced = $menu->first(fn ($top) => collect($top->child_menu ?? [])
             ->contains(fn ($child) => in_array($child->menu_item_link, self::ADVANCED_LINKS, true)));
 

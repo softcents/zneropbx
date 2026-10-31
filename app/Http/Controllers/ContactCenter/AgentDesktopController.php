@@ -48,7 +48,7 @@ class AgentDesktopController extends Controller
 
         $breakReasons = ContactCenterBreakReason::where(function ($q) use ($domainUuid) {
             $q->where('domain_uuid', $domainUuid)->orWhereNull('domain_uuid');
-        })->where('is_active', true)->orderBy('display_order')->get();
+        })->where('is_active', true)->orderBy('name')->get();
 
         return Inertia::render('ContactCenter/AgentDesktop', [
             'agent' => $agent ? [
