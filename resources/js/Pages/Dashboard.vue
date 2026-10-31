@@ -422,6 +422,9 @@
                                   <a href="/analytics/operations-intelligence" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600 transition">
                                       {{ $t('Operations Intelligence') }}
                                   </a>
+                                  <a href="/system/release-readiness" class="inline-flex items-center gap-1.5 rounded-lg bg-amber-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-600 transition">
+                                      {{ $t('Release & Production Readiness') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

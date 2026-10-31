@@ -451,6 +451,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/analytics/operations-intelligence/save-view', [\App\Http\Controllers\Analytics\OperationsIntelligenceController::class, 'storeSavedView'])->name('analytics.operations_intelligence.save_view');
     Route::post('api/analytics/operations-intelligence/forecast-capacity', [\App\Http\Controllers\Analytics\OperationsIntelligenceController::class, 'runCapacityForecast'])->name('analytics.operations_intelligence.forecast');
 
+    // Release Engineering & Production Readiness Studio (P12)
+    Route::get('system/release-readiness', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'index'])->name('system.release_readiness');
+    Route::get('api/system/release-readiness/audit-check', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'auditCheck'])->name('system.release_readiness.audit_check');
+    Route::post('api/system/release-readiness/trigger-backup', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'triggerBackup'])->name('system.release_readiness.trigger_backup');
+    Route::post('api/system/release-readiness/flush-cache-warmup', [\App\Http\Controllers\System\ReleaseReadinessController::class, 'flushCacheWarmup'])->name('system.release_readiness.flush_cache_warmup');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
