@@ -360,6 +360,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('contact-center/analytics', [\App\Http\Controllers\ContactCenter\AnalyticsController::class, 'index'])->name('contact_center.analytics');
     Route::get('contact-center/analytics/export', [\App\Http\Controllers\ContactCenter\AnalyticsController::class, 'export'])->name('contact_center.analytics.export');
 
+    // Advanced Contact Center - Customer 360 & Ticket Workspace
+    Route::get('contact-center/customer-360', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'index'])->name('contact_center.customer360');
+    Route::get('api/contact-center/customer-360/screen-pop', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'screenPop'])->name('contact_center.customer360.screen_pop');
+    Route::get('api/contact-center/customer-360/{customer}', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'show'])->name('contact_center.customer360.show');
+    Route::post('api/contact-center/customer-360', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'store'])->name('contact_center.customer360.store');
+    Route::patch('api/contact-center/customer-360/{customer}', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'update'])->name('contact_center.customer360.update');
+    Route::post('api/contact-center/customer-360/tickets', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'storeTicket'])->name('contact_center.customer360.tickets.store');
+    Route::patch('api/contact-center/customer-360/tickets/{ticket}', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'updateTicket'])->name('contact_center.customer360.tickets.update');
+    Route::post('api/contact-center/customer-360/interactions', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'logInteraction'])->name('contact_center.customer360.interactions.store');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

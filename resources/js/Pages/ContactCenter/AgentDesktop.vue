@@ -514,6 +514,28 @@ function hangupCall() {
 async function lookupCustomer() {
   if (!searchNumber.value) return;
   try {
+    const res = await axios.get("/api/contact-center/customer-360/screen-pop", {
+      params: { phone: searchNumber.value },
+    });
+    if (res.data?.found) {
+      customerData.value = {
+        name: res.data.full_name,
+        company: res.data.company,
+        phone: res.data.phone,
+        email: res.data.email,
+        tier: res.data.tier,
+        status: res.data.status,
+        open_tickets: res.data.open_tickets_count,
+        sentiment: res.data.sentiment,
+        account_number: res.data.account_number,
+        customer_uuid: res.data.customer_uuid,
+      };
+      return;
+    }
+  } catch (err) {
+    // proceed to generic lookup
+  }
+  try {
     const res = await axios.get("/api/contact-center/customer/lookup", {
       params: { number: searchNumber.value },
     });

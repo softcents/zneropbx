@@ -99,6 +99,13 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 7,
             ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/customer-360',
+                'menu_item_title' => __('Customer 360 & Tickets'),
+                'menu_item_link' => '/contact-center/customer-360',
+                'menu_item_icon' => null,
+                'menu_item_order' => 8,
+            ],
         ]);
 
         if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Contact Center') || ($top->menu_item_title ?? '') === 'Contact Center')) {
