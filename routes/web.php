@@ -321,6 +321,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('api/contact-center/agent/{agentUuid}/timeline', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'getAgentTimeline'])->name('contact_center.agent.timeline');
     Route::get('api/contact-center/supervisor/audit-logs', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'auditLogs'])->name('contact_center.supervisor.audit_logs');
 
+    // Advanced Contact Center - Agent Desktop & Omnichannel Workspace
+    Route::get('contact-center/agent-desktop', [\App\Http\Controllers\ContactCenter\AgentDesktopController::class, 'index'])->name('contact_center.agent_desktop');
+    Route::get('api/contact-center/agent-desktop/status', [\App\Http\Controllers\ContactCenter\AgentDesktopController::class, 'status'])->name('contact_center.agent_desktop.status');
+    Route::post('api/contact-center/agent-desktop/disposition', [\App\Http\Controllers\ContactCenter\AgentDesktopController::class, 'submitDisposition'])->name('contact_center.agent_desktop.disposition');
+    Route::get('api/contact-center/customer/lookup', [\App\Http\Controllers\ContactCenter\AgentDesktopController::class, 'customerLookup'])->name('contact_center.customer.lookup');
+
+    // Advanced Contact Center - QA Evaluation & Coaching
+    Route::get('contact-center/qa-evaluation', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'index'])->name('contact_center.qa_evaluation');
+    Route::post('api/contact-center/qa/evaluate', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'evaluate'])->name('contact_center.qa.evaluate');
+    Route::post('api/contact-center/qa/acknowledge', [\App\Http\Controllers\ContactCenter\QaEvaluationController::class, 'acknowledge'])->name('contact_center.qa.acknowledge');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

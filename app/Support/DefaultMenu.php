@@ -39,6 +39,8 @@ class DefaultMenu
                 'link' => null,
                 'groups' => ['superadmin', 'admin', 'user', 'fax', 'agent'],
                 'subcategories' => [
+                    ['title' => __('Agent Desktop', [], $locale), 'link' => '/contact-center/agent-desktop', 'groups' => ['superadmin', 'admin', 'user', 'agent']],
+                    ['title' => __('QA & Coaching', [], $locale), 'link' => '/contact-center/qa-evaluation', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Basic Dialer', [], $locale), 'link' => '/basic-dialer', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Basic Queues', [], $locale), 'link' => '/basic-queues', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Bridges', [], $locale), 'link' => '/bridges', 'groups' => ['superadmin']],
