@@ -370,6 +370,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('api/contact-center/customer-360/tickets/{ticket}', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'updateTicket'])->name('contact_center.customer360.tickets.update');
     Route::post('api/contact-center/customer-360/interactions', [\App\Http\Controllers\ContactCenter\Customer360Controller::class, 'logInteraction'])->name('contact_center.customer360.interactions.store');
 
+    // Advanced Contact Center - Omnichannel Messaging Hub
+    Route::get('contact-center/omnichannel', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'index'])->name('contact_center.omnichannel');
+    Route::get('api/contact-center/omnichannel/{conversation}', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'show'])->name('contact_center.omnichannel.show');
+    Route::post('api/contact-center/omnichannel/{conversation}/reply', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'sendMessage'])->name('contact_center.omnichannel.reply');
+    Route::post('api/contact-center/omnichannel/{conversation}/assign', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'assign'])->name('contact_center.omnichannel.assign');
+    Route::post('api/contact-center/omnichannel/{conversation}/status', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'updateStatus'])->name('contact_center.omnichannel.status');
+    Route::post('api/contact-center/omnichannel/simulate', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'simulateInbound'])->name('contact_center.omnichannel.simulate');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

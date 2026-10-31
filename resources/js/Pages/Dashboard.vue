@@ -389,6 +389,9 @@
                                   <a href="/contact-center/customer-360" class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-600 transition">
                                       {{ $t('Customer 360 & Tickets') }}
                                   </a>
+                                  <a href="/contact-center/omnichannel" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600 transition">
+                                      {{ $t('Omnichannel Hub') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

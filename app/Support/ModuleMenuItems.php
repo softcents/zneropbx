@@ -106,6 +106,13 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 8,
             ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/omnichannel',
+                'menu_item_title' => __('Omnichannel Messaging Hub'),
+                'menu_item_link' => '/contact-center/omnichannel',
+                'menu_item_icon' => null,
+                'menu_item_order' => 9,
+            ],
         ]);
 
         if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Contact Center') || ($top->menu_item_title ?? '') === 'Contact Center')) {
