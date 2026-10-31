@@ -70,6 +70,7 @@ class DefaultMenu
                 'subcategories' => [
                     ['title' => __('Active Calls', [], $locale), 'link' => '/active-calls', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Active Basic Queues', [], $locale), 'link' => '/active-basic-queues', 'groups' => ['superadmin', 'admin']],
+                    ['title' => __('Supervisor Command Center', [], $locale), 'link' => '/contact-center/supervisor-command-center', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Active Conferences', [], $locale), 'link' => '/active-conferences', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Extension Statistics', [], $locale), 'link' => '/extension-statistics', 'groups' => ['superadmin', 'admin']],
                     ['title' => __('Firewall', [], $locale), 'link' => '/firewall', 'groups' => ['superadmin']],

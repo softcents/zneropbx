@@ -313,6 +313,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('basic-queues/agent-status', [BasicQueueController::class, 'agentStatus'])->name('basic-queues.agents.status');
     Route::get('active-basic-queues', [BasicQueueController::class, 'activeBasicQueues'])->name('active-basic-queues.index');
 
+    // Advanced Contact Center & Supervisor Command Center
+    Route::get('contact-center/supervisor-command-center', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'index'])->name('contact_center.supervisor_command_center');
+    Route::get('api/contact-center/live-wallboard', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'liveWallboard'])->name('contact_center.live_wallboard');
+    Route::post('api/contact-center/supervisor/action', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'executeAction'])->name('contact_center.supervisor.action');
+    Route::post('api/contact-center/agent/status', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'setAgentStatus'])->name('contact_center.agent.set_status');
+    Route::get('api/contact-center/agent/{agentUuid}/timeline', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'getAgentTimeline'])->name('contact_center.agent.timeline');
+    Route::get('api/contact-center/supervisor/audit-logs', [\App\Http\Controllers\ContactCenter\SupervisorCommandCenterController::class, 'auditLogs'])->name('contact_center.supervisor.audit_logs');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
