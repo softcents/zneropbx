@@ -16,15 +16,14 @@ export default {
     //     preflight: false,
     //   },
     theme: {
-        fontFamily: {
-            nunito: ["Nunito", "sans-serif"],
-          },
         extend: {
+            fontFamily: {
+                nunito: ["Nunito", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+                sans: ["Nunito", "ui-sans-serif", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            },
             display: ['group-hover'],
             maxWidth: {'95':'95%'},
         },
-
-
     },
     plugins: [
         require('@tailwindcss/forms'),

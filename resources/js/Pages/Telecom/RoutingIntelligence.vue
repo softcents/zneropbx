@@ -1,49 +1,49 @@
 <template>
   <MainLayout>
-    <div class="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto">
+    <div class="m-3 space-y-6">
       <!-- Telecom Routing Studio Header -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
+      <div class="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-5">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <GlobeAltIcon class="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
+            <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <GlobeAltIcon class="w-7 h-7 text-indigo-600" />
               {{ $t("Telecom Routing Intelligence & Carrier LCR Studio") }}
             </h1>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p class="text-sm text-gray-500 mt-1">
               {{ $t("Least Cost Routing (LCR), trunk health telemetry, automated circuit breaker quarantine, and deterministic route simulation.") }}
             </p>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs px-3 py-1.5 rounded-lg bg-indigo-50 text-indigo-700 dark:bg-indigo-900/40 dark:text-indigo-300 font-semibold border border-indigo-200 dark:border-indigo-800">
+            <span class="text-xs px-3 py-1.5 rounded-md bg-indigo-50 text-indigo-700 font-semibold ring-1 ring-inset ring-indigo-700/10">
               P2 Telecom Engine &bull; Active
             </span>
           </div>
         </div>
 
         <!-- KPI Telemetry Cards -->
-        <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-700 grid grid-cols-2 sm:grid-cols-5 gap-4">
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Carrier Trunks") }}</span>
+        <div class="mt-5 pt-4 border-t border-gray-100 grid grid-cols-2 sm:grid-cols-5 gap-4">
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Carrier Trunks") }}</span>
             <div class="flex items-center gap-1.5 mt-0.5">
-              <span class="text-xl font-bold text-gray-900 dark:text-white">{{ stats.total_carriers }}</span>
+              <span class="text-xl font-bold text-gray-900">{{ stats.total_carriers }}</span>
               <span class="text-xs font-semibold text-emerald-600">({{ stats.online_carriers }} Online)</span>
             </div>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Fleet Average ASR") }}</span>
-            <span class="text-xl font-bold text-emerald-600 dark:text-emerald-400">{{ stats.avg_asr }}%</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Fleet Average ASR") }}</span>
+            <span class="text-xl font-bold text-emerald-600">{{ stats.avg_asr }}%</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Average Post-Dial Delay") }}</span>
-            <span class="text-xl font-bold text-indigo-600 dark:text-indigo-400">{{ stats.avg_pdd }} ms</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Average Post-Dial Delay") }}</span>
+            <span class="text-xl font-bold text-indigo-600">{{ stats.avg_pdd }} ms</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Channel Utilization") }}</span>
-            <span class="text-xl font-bold text-purple-600 dark:text-purple-400">{{ stats.active_channels }}/{{ stats.max_channels }}</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Channel Utilization") }}</span>
+            <span class="text-xl font-bold text-purple-600">{{ stats.active_channels }}/{{ stats.max_channels }}</span>
             <span class="text-[10px] text-gray-400 block">{{ stats.utilization_pct }}% load</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Quarantined Trunks") }}</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Quarantined Trunks") }}</span>
             <span class="text-xl font-bold" :class="stats.quarantined_carriers > 0 ? 'text-rose-600' : 'text-gray-400'">
               {{ stats.quarantined_carriers }}
             </span>

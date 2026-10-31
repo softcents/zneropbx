@@ -1,36 +1,36 @@
 <template>
   <MainLayout>
     <div class="space-y-6">
-      <!-- Dark Spotlight Banner Header -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-950 via-emerald-950 to-slate-900 p-6 text-white shadow-xl ring-1 ring-white/10">
+      <!-- Clean Native Software Header -->
+      <div class="rounded-lg bg-white p-5 shadow-sm ring-1 ring-gray-200">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center rounded-md bg-emerald-500/20 px-2 py-0.5 text-xs font-medium text-emerald-300 ring-1 ring-emerald-500/30">
+              <span class="inline-flex items-center rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-700/10">
                 Phase 11 • Operations Intelligence
               </span>
-              <span class="inline-flex items-center rounded-md bg-sky-500/20 px-2 py-0.5 text-xs font-medium text-sky-300 ring-1 ring-sky-500/30">
+              <span class="inline-flex items-center rounded-md bg-sky-50 px-2 py-0.5 text-xs font-semibold text-sky-700 ring-1 ring-inset ring-sky-700/10">
                 Cross-Domain Telemetry & Forecasting
               </span>
             </div>
-            <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-gray-900">
               Operations Intelligence & Analytics Studio
             </h1>
-            <p class="mt-1 text-sm text-gray-300">
+            <p class="mt-1 text-sm text-gray-500">
               Holistic observability across FreeSWITCH cluster nodes, carrier wholesale margin arbitrage, predictive capacity forecasting, and automated BI reporting.
             </p>
           </div>
           <div class="flex items-center gap-2">
             <button
               @click="openNewExportModal"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 transition"
             >
               <DocumentArrowDownIcon class="h-4 w-4" />
               Schedule BI Export
             </button>
             <button
               @click="openNewViewModal"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
             >
               <BookmarkSquareIcon class="h-4 w-4" />
               Save Query View
@@ -39,30 +39,30 @@
         </div>
 
         <!-- Telemetry KPI Summary Cards -->
-        <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-white/10 pt-4">
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Health Score</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-400">{{ metrics.composite_operational_health_score }}%</div>
+        <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-gray-100 pt-4">
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Health Score</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-600">{{ metrics.composite_operational_health_score }}%</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">MTD Billed Revenue</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-cyan-400">${{ Number(metrics.monthly_billed_revenue_usd).toLocaleString() }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">MTD Billed Revenue</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-indigo-600">${{ Number(metrics.monthly_billed_revenue_usd).toLocaleString() }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Gross Margin</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-400">{{ metrics.gross_margin_percent }}%</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Gross Margin</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-600">{{ metrics.gross_margin_percent }}%</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Cluster Nodes</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-indigo-400">{{ metrics.active_cluster_nodes }} Online</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Cluster Nodes</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-sky-600">{{ metrics.active_cluster_nodes }} Online</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Avg Trunk ASR</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-teal-400">{{ metrics.avg_carrier_asr }}%</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Avg Trunk ASR</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-teal-600">{{ metrics.avg_carrier_asr }}%</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Contact Center SL</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-amber-400">{{ metrics.contact_center_sl_pct }}%</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Contact Center SL</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-amber-600">{{ metrics.contact_center_sl_pct }}%</div>
           </div>
         </div>
       </div>
@@ -318,18 +318,18 @@
 
       <!-- TAB 3: Predictive Capacity Forecasting -->
       <div v-if="activeTab === 'forecasting'" class="space-y-6">
-        <div class="rounded-xl bg-slate-900 p-6 text-white shadow-md ring-1 ring-white/10 space-y-6">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+        <div class="rounded-lg bg-white p-6 shadow-sm ring-1 ring-gray-200 space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-100 pb-4">
             <div>
-              <h3 class="text-base font-semibold text-white">Predictive Capacity & Anomaly Forecaster</h3>
-              <p class="mt-1 text-xs text-gray-400">
+              <h3 class="text-base font-semibold text-gray-900">Predictive Capacity &amp; Anomaly Forecaster</h3>
+              <p class="mt-1 text-xs text-gray-500">
                 Machine-learning trend extrapolation to forecast peak SIP trunk concurrency, contact center queue staffing, and AI token run-rate.
               </p>
             </div>
             <div class="flex items-center gap-3">
               <select
                 v-model="forecastQuery.metric"
-                class="rounded-lg border-0 bg-slate-800 py-2 pl-3 pr-8 text-xs text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-emerald-500"
+                class="rounded-md border-0 py-1.5 pl-3 pr-8 text-xs text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600"
               >
                 <option value="concurrent_channels">SIP Trunk Concurrency (Channels)</option>
                 <option value="agent_headcount">ACD Queue Headcount (FTEs)</option>
@@ -339,7 +339,7 @@
 
               <select
                 v-model.number="forecastQuery.days_ahead"
-                class="rounded-lg border-0 bg-slate-800 py-2 pl-3 pr-8 text-xs text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-emerald-500"
+                class="rounded-md border-0 py-1.5 pl-3 pr-8 text-xs text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600"
               >
                 <option :value="7">7 Days Ahead</option>
                 <option :value="14">14 Days Ahead</option>
@@ -349,7 +349,7 @@
               <button
                 @click="runForecast"
                 :disabled="loadingForecast"
-                class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-emerald-500 transition disabled:opacity-50"
+                class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-sm hover:bg-indigo-500 transition disabled:opacity-50"
               >
                 <ArrowTrendingUpIcon class="h-4 w-4" />
                 {{ loadingForecast ? 'Calculating...' : 'Run Projection' }}
@@ -359,26 +359,26 @@
 
           <!-- Forecast Summary Cards -->
           <div v-if="currentForecast" class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="rounded-lg bg-white/5 p-4 ring-1 ring-white/10">
-              <div class="text-xs text-gray-400">Current Baseline</div>
-              <div class="mt-1 text-xl font-bold font-mono text-white">{{ Number(currentForecast.current_baseline).toLocaleString() }} <span class="text-xs font-normal text-gray-400">{{ currentForecast.unit }}</span></div>
+            <div class="rounded-lg bg-gray-50 p-4 ring-1 ring-gray-200">
+              <div class="text-xs text-gray-500">Current Baseline</div>
+              <div class="mt-1 text-xl font-bold font-mono text-gray-900">{{ Number(currentForecast.current_baseline).toLocaleString() }} <span class="text-xs font-normal text-gray-500">{{ currentForecast.unit }}</span></div>
             </div>
-            <div class="rounded-lg bg-white/5 p-4 ring-1 ring-white/10">
-              <div class="text-xs text-gray-400">Projected Peak ({{ currentForecast.days_ahead }}d)</div>
-              <div class="mt-1 text-xl font-bold font-mono text-amber-400">{{ Number(currentForecast.projected_peak).toLocaleString() }} <span class="text-xs font-normal text-gray-400">{{ currentForecast.unit }}</span></div>
+            <div class="rounded-lg bg-gray-50 p-4 ring-1 ring-gray-200">
+              <div class="text-xs text-gray-500">Projected Peak ({{ currentForecast.days_ahead }}d)</div>
+              <div class="mt-1 text-xl font-bold font-mono text-amber-600">{{ Number(currentForecast.projected_peak).toLocaleString() }} <span class="text-xs font-normal text-gray-500">{{ currentForecast.unit }}</span></div>
             </div>
-            <div class="rounded-lg bg-white/5 p-4 ring-1 ring-white/10">
-              <div class="text-xs text-gray-400">Recommended Provisioning Ceiling</div>
-              <div class="mt-1 text-xl font-bold font-mono text-emerald-400">{{ Number(currentForecast.recommended_provisioning_ceiling).toLocaleString() }} <span class="text-xs font-normal text-gray-400">{{ currentForecast.unit }}</span></div>
+            <div class="rounded-lg bg-gray-50 p-4 ring-1 ring-gray-200">
+              <div class="text-xs text-gray-500">Recommended Provisioning Ceiling</div>
+              <div class="mt-1 text-xl font-bold font-mono text-emerald-700">{{ Number(currentForecast.recommended_provisioning_ceiling).toLocaleString() }} <span class="text-xs font-normal text-gray-500">{{ currentForecast.unit }}</span></div>
             </div>
-            <div class="rounded-lg bg-white/5 p-4 ring-1 ring-white/10">
-              <div class="text-xs text-gray-400">Confidence Band</div>
-              <div class="mt-1 text-xl font-bold font-mono text-cyan-400">95% Bayesian</div>
+            <div class="rounded-lg bg-gray-50 p-4 ring-1 ring-gray-200">
+              <div class="text-xs text-gray-500">Confidence Band</div>
+              <div class="mt-1 text-xl font-bold font-mono text-indigo-600">95% Bayesian</div>
             </div>
           </div>
 
           <!-- SVG Visual Trend Graph -->
-          <div v-if="currentForecast && currentForecast.trend_points" class="rounded-xl bg-slate-950 p-6 ring-1 ring-white/10 space-y-3">
+          <div v-if="currentForecast && currentForecast.trend_points" class="rounded-lg bg-gray-900 p-6 ring-1 ring-gray-800 space-y-3">
             <div class="flex items-center justify-between text-xs text-gray-400">
               <span>Demand Extrapolation & Upper Safety Ceiling Curve</span>
               <div class="flex items-center gap-4">

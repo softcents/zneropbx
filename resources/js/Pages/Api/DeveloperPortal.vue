@@ -1,68 +1,68 @@
 <template>
   <MainLayout>
     <div class="space-y-6">
-      <!-- Dark Spotlight Banner Header -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-900 via-indigo-950 to-slate-900 p-6 text-white shadow-xl ring-1 ring-white/10">
+      <!-- Clean Native Software Header -->
+      <div class="rounded-lg bg-white p-5 shadow-sm ring-1 ring-gray-200">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center rounded-md bg-indigo-500/20 px-2 py-0.5 text-xs font-medium text-indigo-300 ring-1 ring-indigo-500/30">
+              <span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
                 Phase 9 • Developer Ecosystem
               </span>
-              <span class="inline-flex items-center rounded-md bg-emerald-500/20 px-2 py-0.5 text-xs font-medium text-emerald-300 ring-1 ring-emerald-500/30">
+              <span class="inline-flex items-center rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-700/10">
                 OpenAPI 3.1 & REST v2
               </span>
             </div>
-            <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-gray-900">
               API, Integration Ecosystem & Developer Portal
             </h1>
-            <p class="mt-1 text-sm text-gray-300">
+            <p class="mt-1 text-sm text-gray-500">
               Enterprise REST v2 gateway, scoped API keys, cryptographic HMAC-SHA256 webhook signatures, idempotency locks, and zero-replay defense.
             </p>
           </div>
           <div class="flex items-center gap-2">
             <button
               @click="openNewKeyModal"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
             >
               <KeyIcon class="h-4 w-4" />
               Generate API Key
             </button>
             <button
               @click="openNewWebhookModal"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition"
             >
-              <SignalIcon class="h-4 w-4" />
+              <SignalIcon class="h-4 w-4 text-gray-500" />
               New Webhook
             </button>
           </div>
         </div>
 
         <!-- Telemetry KPI Summary Cards -->
-        <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-white/10 pt-4">
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Active API Keys</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-white">{{ metrics.active_credentials }}</div>
+        <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-gray-100 pt-4">
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Active API Keys</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-gray-900">{{ metrics.active_credentials }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Live Webhooks</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-indigo-400">{{ metrics.active_webhooks }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Live Webhooks</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-indigo-600">{{ metrics.active_webhooks }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Events Delivered</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-400">{{ Number(metrics.total_events_delivered).toLocaleString() }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Events Delivered</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-600">{{ Number(metrics.total_events_delivered).toLocaleString() }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Delivery Success</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-cyan-400">{{ metrics.webhook_delivery_success_rate }}%</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Delivery Success</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-teal-600">{{ metrics.webhook_delivery_success_rate }}%</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Avg Dispatch Latency</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-amber-400">{{ metrics.avg_webhook_dispatch_latency_ms }} ms</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Avg Dispatch Latency</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-amber-600">{{ metrics.avg_webhook_dispatch_latency_ms }} ms</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Replay Quarantines</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-rose-400">{{ metrics.replay_attacks_quarantined }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Replay Quarantines</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-rose-600">{{ metrics.replay_attacks_quarantined }}</div>
           </div>
         </div>
       </div>
@@ -211,25 +211,26 @@
       </div>
 
       <!-- TAB 2: Webhooks & Live Dispatch Simulator -->
+      <!-- TAB 2: Webhooks & Live Dispatch Simulator -->
       <div v-if="activeTab === 'webhooks'" class="space-y-6">
         <!-- Live Dispatch Simulator Widget -->
-        <div class="rounded-xl bg-slate-900 p-6 text-white shadow-md ring-1 ring-white/10">
-          <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="rounded-lg bg-white p-6 shadow-sm ring-1 ring-gray-200">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-4">
             <div>
-              <h3 class="text-base font-semibold text-white">Live Webhook Dispatch & HMAC Signature Simulator</h3>
-              <p class="text-xs text-gray-400">Trigger test telemetry events with calculated <code class="text-emerald-400">X-Znero-Signature</code> headers and measure ingestion turnaround latency.</p>
+              <h3 class="text-base font-semibold text-gray-900">Live Webhook Dispatch &amp; HMAC Signature Simulator</h3>
+              <p class="mt-1 text-xs text-gray-500">Trigger test telemetry events with calculated <code class="text-emerald-700 font-semibold">X-Znero-Signature</code> headers and measure ingestion turnaround latency.</p>
             </div>
-            <span class="rounded bg-indigo-500/20 px-2.5 py-1 text-xs font-semibold text-indigo-300 ring-1 ring-indigo-500/30">
+            <span class="rounded bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-700 ring-1 ring-indigo-700/10">
               SHA-256 Digest
             </span>
           </div>
 
           <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
             <div>
-              <label class="block text-xs font-medium text-gray-300">Target Webhook Subscription</label>
+              <label class="block text-xs font-medium text-gray-700">Target Webhook Subscription</label>
               <select
                 v-model="simWebhook.webhook_uuid"
-                class="mt-1 block w-full rounded-lg border-0 bg-slate-800 py-2 pl-3 pr-8 text-sm text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-indigo-500"
+                class="mt-1 block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600"
               >
                 <option v-for="wh in webhooks" :key="wh.uuid" :value="wh.uuid">
                   {{ wh.name }} ({{ wh.target_url.slice(0, 35) }}...)
@@ -237,10 +238,10 @@
               </select>
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-300">Event Type</label>
+              <label class="block text-xs font-medium text-gray-700">Event Type</label>
               <select
                 v-model="simWebhook.event_type"
-                class="mt-1 block w-full rounded-lg border-0 bg-slate-800 py-2 pl-3 pr-8 text-sm text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-indigo-500"
+                class="mt-1 block w-full rounded-md border-0 py-1.5 pl-3 pr-8 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600"
               >
                 <option value="call.completed">call.completed (Voice Leg Teardown)</option>
                 <option value="sms.delivered">sms.delivered (Carrier DLR Handshake)</option>
@@ -252,7 +253,7 @@
               <button
                 @click="dispatchSimulatedWebhook"
                 :disabled="simulating"
-                class="w-full inline-flex justify-center items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 transition disabled:opacity-50"
+                class="w-full inline-flex justify-center items-center gap-2 rounded-md bg-emerald-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 transition disabled:opacity-50"
               >
                 <PaperAirplaneIcon class="h-4 w-4" />
                 {{ simulating ? 'Dispatching...' : 'Dispatch Live Event' }}
@@ -261,18 +262,18 @@
           </div>
 
           <!-- Simulation Result Box -->
-          <div v-if="simResult" class="mt-5 rounded-lg bg-slate-950 p-4 ring-1 ring-white/10 text-xs font-mono space-y-2">
-            <div class="flex items-center justify-between text-emerald-400 font-bold border-b border-white/10 pb-2">
+          <div v-if="simResult" class="mt-5 rounded-lg bg-gray-50 p-4 ring-1 ring-gray-200 text-xs font-mono space-y-2">
+            <div class="flex items-center justify-between text-emerald-700 font-bold border-b border-gray-200 pb-2">
               <span class="flex items-center gap-1.5">
-                <CheckCircleIcon class="h-4 w-4 text-emerald-400" />
+                <CheckCircleIcon class="h-4 w-4 text-emerald-600" />
                 Dispatch Status: HTTP {{ simResult.http_status }} OK ({{ simResult.latency_ms }}ms turnaround)
               </span>
-              <span class="text-gray-400">Idempotency Key: {{ simResult.idempotency_key }}</span>
+              <span class="text-gray-500">Idempotency Key: {{ simResult.idempotency_key }}</span>
             </div>
-            <div class="text-indigo-300">
+            <div class="text-indigo-700">
               <span class="text-gray-500">X-Znero-Signature:</span> {{ simResult.signature_header }}
             </div>
-            <div class="text-gray-300 max-h-40 overflow-y-auto bg-slate-900 p-2.5 rounded border border-white/10">
+            <div class="text-gray-800 max-h-40 overflow-y-auto bg-white p-2.5 rounded border border-gray-200">
               <pre>{{ JSON.stringify(simResult.payload, null, 2) }}</pre>
             </div>
           </div>
@@ -525,7 +526,7 @@
                     Copy cURL
                   </button>
                 </div>
-                <div class="rounded-lg bg-slate-950 p-4 font-mono text-xs text-indigo-300 overflow-x-auto ring-1 ring-white/10">
+                <div class="rounded-lg bg-gray-900 p-4 font-mono text-xs text-indigo-300 overflow-x-auto ring-1 ring-gray-800">
                   <pre>{{ selectedEndpoint.curl_sample }}</pre>
                 </div>
               </div>
@@ -533,7 +534,7 @@
               <!-- Sample JSON Response -->
               <div>
                 <h3 class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Sample JSON Response (HTTP 200 OK)</h3>
-                <div class="rounded-lg bg-slate-900 p-4 font-mono text-xs text-emerald-400 overflow-x-auto ring-1 ring-white/10">
+                <div class="rounded-lg bg-gray-900 p-4 font-mono text-xs text-emerald-400 overflow-x-auto ring-1 ring-gray-800">
                   <pre>{{ JSON.stringify(selectedEndpoint.response_sample, null, 2) }}</pre>
                 </div>
               </div>
@@ -686,7 +687,7 @@
             <button @click="activeLogPayload = null" class="text-gray-400 hover:text-gray-600 text-sm">✕</button>
           </div>
 
-          <div class="mt-4 rounded-lg bg-slate-950 p-4 font-mono text-xs text-emerald-400 max-h-96 overflow-y-auto">
+          <div class="mt-4 rounded-lg bg-gray-900 p-4 font-mono text-xs text-emerald-400 max-h-96 overflow-y-auto">
             <pre>{{ JSON.stringify(activeLogPayload.payload_json, null, 2) }}</pre>
           </div>
 

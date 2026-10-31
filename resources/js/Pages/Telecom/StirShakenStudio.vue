@@ -1,47 +1,44 @@
 <template>
   <MainLayout>
     <div class="space-y-6">
-      <!-- Dark Spotlight Header Banner -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-8 shadow-xl text-white">
-        <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-          <div class="space-y-2">
+      <!-- Clean Native Software Header -->
+      <div class="rounded-lg bg-white p-5 shadow-sm ring-1 ring-gray-200">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center gap-1.5 rounded-full bg-indigo-500/20 px-3 py-1 text-xs font-semibold text-indigo-300 ring-1 ring-inset ring-indigo-500/30">
-                <ShieldCheckIcon class="h-4 w-4 text-indigo-400" />
+              <span class="inline-flex items-center gap-1.5 rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
+                <ShieldCheckIcon class="h-3.5 w-3.5 text-indigo-600" />
                 FCC &amp; CRTC Mandate Compliant (RFC 8588)
               </span>
-              <span class="inline-flex items-center rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-semibold text-emerald-300 ring-1 ring-inset ring-emerald-500/30">
+              <span class="inline-flex items-center rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-700/10">
                 FreeSWITCH ESL Connected
               </span>
             </div>
-            <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-gray-900">
               STIR/SHAKEN Caller Identity &amp; PASSporT Studio
             </h1>
-            <p class="max-w-3xl text-sm text-slate-300">
-              Cryptographic call authentication, ES256 PASSporT signing, attestation policy scoring (A, B, C), and automated SIP <code class="font-mono text-indigo-300">Identity</code> header injection for FreeSWITCH carrier bridges.
+            <p class="max-w-3xl mt-1 text-sm text-gray-500">
+              Cryptographic call authentication, ES256 PASSporT signing, attestation policy scoring (A, B, C), and automated SIP <code class="font-mono text-indigo-600 bg-indigo-50 px-1 py-0.5 rounded">Identity</code> header injection for FreeSWITCH carrier bridges.
             </p>
           </div>
 
-          <div class="flex flex-wrap items-center gap-3">
+          <div class="flex flex-wrap items-center gap-2">
             <button
               @click="openCertModal = true"
-              class="inline-flex items-center gap-2 rounded-xl bg-slate-800/90 px-4 py-2.5 text-xs font-semibold text-white shadow-sm ring-1 ring-white/10 hover:bg-slate-700 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition"
             >
-              <KeyIcon class="h-4 w-4 text-indigo-400" />
+              <KeyIcon class="h-4 w-4 text-gray-500" />
               New EC P-256 Keypair
             </button>
             <button
               @click="activeTab = 'simulator'"
-              class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-xs font-semibold text-white shadow-md hover:bg-indigo-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
             >
               <SparklesIcon class="h-4 w-4" />
               Live PASSporT Generator
             </button>
           </div>
         </div>
-
-        <div class="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-indigo-500/10 blur-3xl"></div>
-        <div class="absolute -left-10 -bottom-10 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl"></div>
       </div>
 
       <!-- Quick Telemetry KPI Matrix -->
@@ -184,7 +181,7 @@
               <!-- Full SIP Identity Header -->
               <div>
                 <span class="text-xs font-bold uppercase tracking-wider text-gray-500">Injected SIP Identity Header:</span>
-                <div class="mt-1 relative rounded-lg bg-slate-900 p-3 font-mono text-xs text-indigo-300 break-all select-all">
+                <div class="mt-1 relative rounded-lg bg-gray-900 p-3 font-mono text-xs text-indigo-300 break-all select-all">
                   Identity: {{ simResult.identity_header }}
                 </div>
               </div>

@@ -1,23 +1,23 @@
 <template>
   <MainLayout>
     <div class="space-y-6">
-      <!-- Dark Spotlight Banner Header -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-950 via-amber-950 to-slate-900 p-6 text-white shadow-xl ring-1 ring-white/10">
+      <!-- Clean Native Software Header -->
+      <div class="rounded-lg bg-white p-5 shadow-sm ring-1 ring-gray-200">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center rounded-md bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-300 ring-1 ring-amber-500/30">
+              <span class="inline-flex items-center rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
                 Phase 12 • Release Engineering
               </span>
-              <span class="inline-flex items-center gap-1 rounded-md bg-emerald-500/20 px-2 py-0.5 text-xs font-medium text-emerald-300 ring-1 ring-emerald-500/30">
-                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              <span class="inline-flex items-center gap-1 rounded-md bg-emerald-50 px-2 py-0.5 text-xs font-semibold text-emerald-700 ring-1 ring-inset ring-emerald-700/10">
+                <span class="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
                 Production Ready • 100% Score
               </span>
             </div>
-            <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-gray-900">
               Release Engineering & Production Readiness Studio
             </h1>
-            <p class="mt-1 text-sm text-gray-300">
+            <p class="mt-1 text-sm text-gray-500">
               Enterprise multi-tier subsystem verification, automated configuration and database recovery snapshots, zero-downtime deployment pipelines, and staged rollback runbooks.
             </p>
           </div>
@@ -25,54 +25,54 @@
             <button
               @click="runLiveAudit"
               :disabled="auditing"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-amber-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-500 transition disabled:opacity-50"
+              class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition disabled:opacity-50"
             >
               <ArrowPathIcon :class="['h-4 w-4', auditing ? 'animate-spin' : '']" />
               Re-run Live Audit
             </button>
             <button
               @click="showSnapshotModal = true"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition"
             >
-              <ArchiveBoxArrowDownIcon class="h-4 w-4" />
+              <ArchiveBoxArrowDownIcon class="h-4 w-4 text-gray-500" />
               Create Snapshot
             </button>
             <button
               @click="flushCache"
               :disabled="flushing"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-slate-800 px-3.5 py-2 text-sm font-semibold text-gray-200 ring-1 ring-white/10 hover:bg-slate-700 transition disabled:opacity-50"
+              class="inline-flex items-center gap-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 transition disabled:opacity-50"
             >
-              <BoltIcon class="h-4 w-4 text-amber-400" />
+              <BoltIcon class="h-4 w-4 text-amber-500" />
               Flush &amp; Warmup
             </button>
           </div>
         </div>
 
         <!-- Telemetry KPI Summary Cards -->
-        <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-white/10 pt-4">
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">System Audit Score</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-400">{{ liveAudit.overall_score_pct }}%</div>
+        <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-gray-100 pt-4">
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">System Audit Score</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-600">{{ liveAudit.overall_score_pct }}%</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Subsystem Health</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-300">{{ liveAudit.passed_tiers }} / {{ liveAudit.total_tiers }} Tiers</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Subsystem Health</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-700">{{ liveAudit.passed_tiers }} / {{ liveAudit.total_tiers }} Tiers</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Active Release</div>
-            <div class="mt-1 text-base font-bold text-amber-400 truncate">{{ metrics.active_release }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Active Release</div>
+            <div class="mt-1 text-sm font-bold text-gray-900 truncate">{{ metrics.active_release }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">VoIP Engine</div>
-            <div class="mt-1 text-base font-bold text-sky-400">FreeSWITCH 1.10.12</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">VoIP Engine</div>
+            <div class="mt-1 text-sm font-bold text-gray-900">FreeSWITCH 1.10.12</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Database Engine</div>
-            <div class="mt-1 text-base font-bold text-indigo-300">PostgreSQL 17.x</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Database Engine</div>
+            <div class="mt-1 text-sm font-bold text-gray-900">PostgreSQL 17.x</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Backup Snapshots</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-amber-300">{{ snapshotsList.length }} Ready</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Backup Snapshots</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-indigo-600">{{ snapshotsList.length }} Ready</div>
           </div>
         </div>
       </div>

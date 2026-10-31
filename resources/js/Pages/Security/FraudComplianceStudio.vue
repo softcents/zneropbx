@@ -1,37 +1,37 @@
 <template>
   <MainLayout>
     <div class="space-y-6">
-      <!-- Dark Spotlight Banner Header -->
-      <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-gray-950 via-rose-950 to-slate-900 p-6 text-white shadow-xl ring-1 ring-white/10">
+      <!-- Clean Native Software Header -->
+      <div class="rounded-lg bg-white p-5 shadow-sm ring-1 ring-gray-200">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <div class="flex items-center gap-2">
-              <span class="inline-flex items-center rounded-md bg-rose-500/20 px-2 py-0.5 text-xs font-medium text-rose-300 ring-1 ring-rose-500/30">
+              <span class="inline-flex items-center rounded-md bg-rose-50 px-2 py-0.5 text-xs font-semibold text-rose-700 ring-1 ring-inset ring-rose-700/10">
                 Phase 10 • Threat Intelligence
               </span>
-              <span class="inline-flex items-center gap-1 rounded-md bg-amber-500/20 px-2 py-0.5 text-xs font-medium text-amber-300 ring-1 ring-amber-500/30">
-                <span class="h-1.5 w-1.5 rounded-full bg-amber-400 animate-ping"></span>
+              <span class="inline-flex items-center gap-1 rounded-md bg-amber-50 px-2 py-0.5 text-xs font-semibold text-amber-700 ring-1 ring-inset ring-amber-700/10">
+                <span class="h-1.5 w-1.5 rounded-full bg-amber-500"></span>
                 {{ metrics.threat_posture }}
               </span>
             </div>
-            <h1 class="mt-2 text-2xl font-bold tracking-tight text-white sm:text-3xl">
+            <h1 class="mt-2 text-2xl font-bold tracking-tight text-gray-900">
               Security, Fraud Detection & Compliance Studio
             </h1>
-            <p class="mt-1 text-sm text-gray-300">
+            <p class="mt-1 text-sm text-gray-500">
               Carrier-grade toll fraud prevention, SIP brute-force quarantine, nftables dynamic border firewalling, and immutable regulatory data governance.
             </p>
           </div>
           <div class="flex items-center gap-2">
             <button
               @click="openQuarantineModal"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-rose-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-rose-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 transition"
             >
               <NoSymbolIcon class="h-4 w-4" />
               Quarantine IP
             </button>
             <button
               @click="openNewRuleModal"
-              class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3.5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
+              class="inline-flex items-center gap-1.5 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 transition"
             >
               <ShieldCheckIcon class="h-4 w-4" />
               Add Fraud Rule
@@ -40,30 +40,30 @@
         </div>
 
         <!-- Telemetry KPI Summary Cards -->
-        <div class="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-white/10 pt-4">
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Threat Posture</div>
-            <div class="mt-1 text-lg font-bold text-amber-400 truncate">{{ metrics.threat_posture.split('•')[1] || 'ELEVATED' }}</div>
+        <div class="mt-5 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6 border-t border-gray-100 pt-4">
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Threat Posture</div>
+            <div class="mt-1 text-lg font-bold text-amber-700 truncate">{{ metrics.threat_posture.split('•')[1] || 'ELEVATED' }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Quarantined IPs</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-rose-400">{{ metrics.active_quarantines }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Quarantined IPs</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-rose-600">{{ metrics.active_quarantines }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Open Incidents</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-amber-300">{{ metrics.open_incidents }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Open Incidents</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-amber-600">{{ metrics.open_incidents }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Attacks Mitigated</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-400">{{ metrics.total_mitigated_attacks }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Attacks Mitigated</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-600">{{ metrics.total_mitigated_attacks }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Fraud Loss Prevented</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-cyan-400">${{ Number(metrics.fraud_capital_saved_usd).toLocaleString() }}</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Fraud Loss Prevented</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-indigo-600">${{ Number(metrics.fraud_capital_saved_usd).toLocaleString() }}</div>
           </div>
-          <div class="rounded-lg bg-white/5 p-3 ring-1 ring-white/10 backdrop-blur-sm">
-            <div class="text-xs font-medium text-gray-400">Mitigation Latency</div>
-            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-400">&lt; {{ metrics.avg_mitigation_latency_ms }} ms</div>
+          <div class="rounded-lg bg-gray-50 p-3 ring-1 ring-gray-100">
+            <div class="text-xs font-medium text-gray-500">Mitigation Latency</div>
+            <div class="mt-1 text-xl font-bold tabular-nums text-emerald-600">&lt; {{ metrics.avg_mitigation_latency_ms }} ms</div>
           </div>
         </div>
       </div>
@@ -345,63 +345,63 @@
 
       <!-- TAB 4: Real-Time Threat Simulator -->
       <div v-if="activeTab === 'simulator'" class="space-y-6">
-        <div class="rounded-xl bg-slate-900 p-6 text-white shadow-md ring-1 ring-white/10">
-          <div class="border-b border-white/10 pb-4">
-            <h3 class="text-base font-semibold text-white">Real-Time Threat & Velocity Evaluation Simulator</h3>
-            <p class="mt-1 text-xs text-gray-400">
+        <div class="rounded-lg bg-white p-6 shadow-sm ring-1 ring-gray-200">
+          <div class="border-b border-gray-100 pb-4">
+            <h3 class="text-base font-semibold text-gray-900">Real-Time Threat &amp; Velocity Evaluation Simulator</h3>
+            <p class="mt-1 text-xs text-gray-500">
               Simulate call destination bursts, international premium rate spikes, and off-hours volume to observe composite risk calculation and automatic nftables quarantine.
             </p>
           </div>
 
           <div class="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
             <div>
-              <label class="block text-xs font-medium text-gray-300">Originating Source IP</label>
+              <label class="block text-xs font-medium text-gray-700">Originating Source IP</label>
               <input
                 v-model="simThreat.source_ip"
                 type="text"
-                class="mt-1 block w-full rounded-lg border-0 bg-slate-800 py-2 px-3 text-sm text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-rose-500 font-mono"
+                class="mt-1 block w-full rounded-md border-0 py-1.5 px-3 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 font-mono"
               />
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-300">Target Destination E.164 Number</label>
+              <label class="block text-xs font-medium text-gray-700">Target Destination E.164 Number</label>
               <input
                 v-model="simThreat.destination_number"
                 type="text"
-                class="mt-1 block w-full rounded-lg border-0 bg-slate-800 py-2 px-3 text-sm text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-rose-500 font-mono"
+                class="mt-1 block w-full rounded-md border-0 py-1.5 px-3 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 font-mono"
               />
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-300">Call Velocity (Attempts / Minute)</label>
+              <label class="block text-xs font-medium text-gray-700">Call Velocity (Attempts / Minute)</label>
               <input
                 v-model.number="simThreat.calls_per_minute"
                 type="number"
-                class="mt-1 block w-full rounded-lg border-0 bg-slate-800 py-2 px-3 text-sm text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-rose-500 font-mono"
+                class="mt-1 block w-full rounded-md border-0 py-1.5 px-3 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 font-mono"
               />
             </div>
             <div>
-              <label class="block text-xs font-medium text-gray-300">Carrier Unit Rate ($ / Minute)</label>
+              <label class="block text-xs font-medium text-gray-700">Carrier Unit Rate ($ / Minute)</label>
               <input
                 v-model.number="simThreat.rate_usd_per_min"
                 type="number"
                 step="0.05"
-                class="mt-1 block w-full rounded-lg border-0 bg-slate-800 py-2 px-3 text-sm text-white shadow-sm ring-1 ring-white/20 focus:ring-2 focus:ring-rose-500 font-mono"
+                class="mt-1 block w-full rounded-md border-0 py-1.5 px-3 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-indigo-600 font-mono"
               />
             </div>
           </div>
 
-          <div class="mt-4 flex items-center justify-between border-t border-white/10 pt-4">
-            <label class="flex items-center gap-2 text-xs text-gray-300">
+          <div class="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">
+            <label class="flex items-center gap-2 text-xs text-gray-700">
               <input
                 type="checkbox"
                 v-model="simThreat.is_off_hours"
-                class="rounded border-gray-600 bg-slate-800 text-rose-600 focus:ring-rose-500"
+                class="rounded border-gray-300 text-rose-600 focus:ring-rose-500"
               />
               Simulate Off-Hours Outbound Traffic Pattern
             </label>
             <button
               @click="runThreatSimulation"
               :disabled="simulating"
-              class="inline-flex items-center gap-2 rounded-lg bg-rose-600 px-5 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 transition disabled:opacity-50"
+              class="inline-flex items-center gap-2 rounded-md bg-rose-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-rose-500 transition disabled:opacity-50"
             >
               <ExclamationTriangleIcon class="h-4 w-4" />
               {{ simulating ? 'Analyzing Threat...' : 'Evaluate Call Vector' }}
@@ -409,50 +409,50 @@
           </div>
 
           <!-- Simulation Result Box -->
-          <div v-if="simResult" class="mt-6 rounded-xl bg-slate-950 p-5 ring-1 ring-white/10 space-y-4">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-4">
+          <div v-if="simResult" class="mt-6 rounded-lg bg-gray-50 p-5 ring-1 ring-gray-200 space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-gray-200 pb-4">
               <div class="flex items-center gap-3">
                 <span
                   :class="[
-                    simResult.threat_level === 'CRITICAL' ? 'bg-rose-500 text-white' :
-                    simResult.threat_level === 'HIGH' ? 'bg-amber-500 text-black' : 'bg-emerald-500 text-white',
-                    'rounded-lg px-3 py-1 font-mono text-sm font-bold'
+                    simResult.threat_level === 'CRITICAL' ? 'bg-rose-600 text-white' :
+                    simResult.threat_level === 'HIGH' ? 'bg-amber-500 text-white' : 'bg-emerald-600 text-white',
+                    'rounded-md px-2.5 py-1 font-mono text-xs font-bold'
                   ]"
                 >
                   {{ simResult.threat_level }} RISK
                 </span>
                 <div>
-                  <div class="text-base font-bold text-white">Composite Threat Score: {{ simResult.composite_risk_score }}%</div>
-                  <div class="text-xs text-gray-400">Intervention latency: {{ simResult.mitigation_latency_ms }} ms</div>
+                  <div class="text-sm font-bold text-gray-900">Composite Threat Score: {{ simResult.composite_risk_score }}%</div>
+                  <div class="text-xs text-gray-500">Intervention latency: {{ simResult.mitigation_latency_ms }} ms</div>
                 </div>
               </div>
 
               <div class="text-right">
-                <div class="text-xs text-gray-400">Enforced Mitigation Action</div>
-                <div class="font-mono text-sm font-bold text-rose-400">{{ simResult.recommended_action }}</div>
+                <div class="text-xs text-gray-500">Enforced Mitigation Action</div>
+                <div class="font-mono text-sm font-bold text-rose-600">{{ simResult.recommended_action }}</div>
               </div>
             </div>
 
             <!-- Triggered Rules List -->
             <div>
-              <div class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Triggered Risk Heuristics</div>
+              <div class="text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Triggered Risk Heuristics</div>
               <div class="space-y-2">
                 <div
                   v-for="(tr, idx) in simResult.triggered_rules"
                   :key="idx"
-                  class="flex items-center justify-between rounded-lg bg-slate-900 p-3 text-xs ring-1 ring-white/10"
+                  class="flex items-center justify-between rounded-md bg-white p-3 text-xs ring-1 ring-gray-200"
                 >
                   <div class="space-y-0.5">
-                    <div class="font-bold text-white">{{ tr.rule }}</div>
-                    <div class="text-gray-400">{{ tr.detail }}</div>
+                    <div class="font-semibold text-gray-900">{{ tr.rule }}</div>
+                    <div class="text-gray-500">{{ tr.detail }}</div>
                   </div>
-                  <span class="font-mono font-bold text-rose-400">{{ tr.weight }}</span>
+                  <span class="font-mono font-bold text-rose-600">{{ tr.weight }}</span>
                 </div>
               </div>
             </div>
 
-            <div v-if="simResult.auto_quarantined" class="rounded-lg bg-rose-950/60 border border-rose-500/40 p-3 text-xs text-rose-200 flex items-center gap-2">
-              <ShieldExclamationIcon class="h-5 w-5 text-rose-400 flex-none" />
+            <div v-if="simResult.auto_quarantined" class="rounded-md bg-rose-50 border border-rose-200 p-3 text-xs text-rose-800 flex items-center gap-2">
+              <ShieldExclamationIcon class="h-5 w-5 text-rose-600 flex-none" />
               <span>Critical threat detected. <strong>{{ simResult.source_ip }}</strong> was automatically quarantined and added to border nftables drop filter.</span>
             </div>
           </div>

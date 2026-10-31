@@ -2,16 +2,16 @@
     <MainLayout>
         <div class="m-3 space-y-4">
         <!-- Header & Top Navigation -->
-        <div class="flex flex-wrap items-center justify-between gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-200">
+        <div class="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-white p-5 shadow-sm ring-1 ring-gray-200">
             <div>
                 <div class="flex items-center gap-2">
-                    <span class="inline-flex h-3 w-3 animate-ping rounded-full bg-emerald-400"></span>
+                    <span class="inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
                     <h1 class="text-xl font-bold text-gray-900 tracking-tight">{{ $t("Supervisor Command Center") }}</h1>
                     <span class="rounded-md bg-indigo-50 px-2 py-0.5 text-xs font-semibold text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
                         {{ $t("Live Pro Ops") }}
                     </span>
                 </div>
-                <p class="mt-1 text-xs text-gray-500">
+                <p class="mt-1 text-sm text-gray-500">
                     {{ $t("Real-time Queue Intelligence, Agent State Management, and Telephony Interventions (Listen, Whisper, Barge).") }}
                 </p>
             </div>

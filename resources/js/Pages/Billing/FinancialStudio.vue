@@ -1,20 +1,20 @@
 <template>
   <MainLayout>
-    <div class="p-4 sm:p-6 space-y-6 max-w-7xl mx-auto">
+    <div class="m-3 space-y-6">
       <!-- Financial Studio Header -->
-      <div class="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-5">
+      <div class="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-5">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-              <BanknotesIcon class="w-7 h-7 text-indigo-600 dark:text-indigo-400" />
+            <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+              <BanknotesIcon class="w-7 h-7 text-indigo-600" />
               {{ $t("Financial Rating, Ledger & Tariff Studio") }}
             </h1>
-            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">
+            <p class="text-sm text-gray-500 mt-1">
               {{ $t("Immutable double-entry ledger, versioned tariff rate cards, real-time CDR rating, and revenue assurance.") }}
             </p>
           </div>
           <div class="flex items-center space-x-2">
-            <span class="text-xs px-3 py-1.5 rounded-lg bg-emerald-50 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 font-semibold border border-emerald-200 dark:border-emerald-800 flex items-center gap-1.5">
+            <span class="text-xs px-3 py-1.5 rounded-md bg-emerald-50 text-emerald-700 font-semibold ring-1 ring-inset ring-emerald-700/10 flex items-center gap-1.5">
               <CheckBadgeIcon class="w-4 h-4 text-emerald-600" />
               Ledger Reconciled: 100% Balanced
             </span>
@@ -22,28 +22,28 @@
         </div>
 
         <!-- KPI Telemetry Cards -->
-        <div class="mt-5 pt-4 border-t border-gray-100 dark:border-gray-700 grid grid-cols-2 sm:grid-cols-5 gap-4">
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Available Balance") }}</span>
-            <span class="text-xl font-bold text-emerald-600 dark:text-emerald-400 font-mono">${{ stats.available_balance }}</span>
+        <div class="mt-5 pt-4 border-t border-gray-100 grid grid-cols-2 sm:grid-cols-5 gap-4">
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Available Balance") }}</span>
+            <span class="text-xl font-bold text-emerald-600 font-mono">${{ stats.available_balance }}</span>
             <span class="text-[10px] text-gray-400 block">{{ wallet.account_number }} ({{ wallet.billing_type }})</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Credit Limit") }}</span>
-            <span class="text-xl font-bold text-gray-900 dark:text-white font-mono">${{ stats.credit_limit }}</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Credit Limit") }}</span>
+            <span class="text-xl font-bold text-gray-900 font-mono">${{ stats.credit_limit }}</span>
             <span class="text-[10px] text-gray-400 block">{{ wallet.currency }}</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Total Inflow / Deposits") }}</span>
-            <span class="text-xl font-bold text-indigo-600 dark:text-indigo-400 font-mono">+${{ stats.total_deposits }}</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Total Inflow / Deposits") }}</span>
+            <span class="text-xl font-bold text-indigo-600 font-mono">+${{ stats.total_deposits }}</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Total Usage Outflow") }}</span>
-            <span class="text-xl font-bold text-rose-600 dark:text-rose-400 font-mono">-${{ stats.total_usage }}</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Total Usage Outflow") }}</span>
+            <span class="text-xl font-bold text-rose-600 font-mono">-${{ stats.total_usage }}</span>
           </div>
-          <div class="bg-gray-50 dark:bg-gray-750 p-3.5 rounded-lg">
-            <span class="text-xs text-gray-500 dark:text-gray-400 block">{{ $t("Invoices / Statements") }}</span>
-            <span class="text-xl font-bold text-gray-900 dark:text-white">{{ stats.invoices_count }}</span>
+          <div class="bg-gray-50 p-3.5 rounded-lg ring-1 ring-gray-100">
+            <span class="text-xs text-gray-500 block">{{ $t("Invoices / Statements") }}</span>
+            <span class="text-xl font-bold text-gray-900">{{ stats.invoices_count }}</span>
           </div>
         </div>
       </div>
