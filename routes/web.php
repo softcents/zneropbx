@@ -391,6 +391,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/telecom/routing-intelligence/simulate', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'simulate'])->name('telecom.routing_intelligence.simulate');
     Route::post('api/telecom/routing-intelligence/carriers/{carrier}/circuit-breaker', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'toggleCircuitBreaker'])->name('telecom.routing_intelligence.circuit_breaker');
 
+    // Financial Rating, Double-Entry Ledger & Billing Studio (P3)
+    Route::get('billing/financial-studio', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'index'])->name('billing.financial_studio');
+    Route::post('api/billing/financial-studio/simulate', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'simulate'])->name('billing.financial_studio.simulate');
+    Route::post('api/billing/financial-studio/deposit', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'deposit'])->name('billing.financial_studio.deposit');
+    Route::post('api/billing/financial-studio/invoice', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'generateInvoice'])->name('billing.financial_studio.invoice');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

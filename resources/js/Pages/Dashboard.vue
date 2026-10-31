@@ -398,6 +398,9 @@
                                   <a href="/telecom/routing-intelligence" class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-teal-600 transition">
                                       {{ $t('Carrier LCR Studio') }}
                                   </a>
+                                  <a href="/billing/financial-studio" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600 transition">
+                                      {{ $t('Financial & Tariff Studio') }}
+                                  </a>
                               </div>
                           </div>
                       </div>
