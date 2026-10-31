@@ -64,7 +64,7 @@ class AcdRoutingController extends Controller
 
         $callbacks = ContactCenterCallback::where('domain_uuid', $domainUuid)
             ->with(['queue:call_center_queue_uuid,queue_name,queue_extension'])
-            ->orderBy('scheduled_at', 'asc')
+            ->orderBy('created_at', 'desc')
             ->limit(50)
             ->get();
 
@@ -219,7 +219,7 @@ class AcdRoutingController extends Controller
         $action = $request->input('action');
 
         if ($action === 'trigger') {
-            $callback->scheduled_at = now();
+            $callback->next_attempt_at = now();
             $callback->save();
             $result = $this->callbackService->processPendingCallbacks();
             return response()->json([
@@ -229,7 +229,7 @@ class AcdRoutingController extends Controller
             ]);
         } elseif ($action === 'cancel') {
             $callback->status = 'cancelled';
-            $callback->notes = 'Cancelled by supervisor';
+            $callback->last_error = 'Cancelled by supervisor';
             $callback->save();
             return response()->json([
                 'success' => true,

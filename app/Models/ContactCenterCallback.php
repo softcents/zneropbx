@@ -12,28 +12,42 @@ class ContactCenterCallback extends Model
     use HasFactory, TraitUuid;
 
     protected $table = 'contact_center_callbacks';
-    protected $primaryKey = 'callback_uuid';
+    protected $primaryKey = 'contact_center_callback_uuid';
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'callback_uuid',
+        'contact_center_callback_uuid',
         'domain_uuid',
         'queue_uuid',
-        'caller_number',
-        'caller_name',
+        'number',
         'status',
         'attempts',
-        'scheduled_at',
-        'completed_at',
-        'notes',
+        'next_attempt_at',
+        'expires_at',
+        'last_error',
     ];
 
     protected $casts = [
         'attempts' => 'integer',
-        'scheduled_at' => 'datetime',
-        'completed_at' => 'datetime',
+        'next_attempt_at' => 'datetime',
+        'expires_at' => 'datetime',
     ];
+
+    protected $appends = [
+        'caller_number',
+        'scheduled_at',
+    ];
+
+    public function getCallerNumberAttribute(): string
+    {
+        return $this->number ?? '';
+    }
+
+    public function getScheduledAtAttribute()
+    {
+        return $this->next_attempt_at;
+    }
 
     public function queue(): BelongsTo
     {
