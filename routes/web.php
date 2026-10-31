@@ -420,6 +420,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/messaging/sms-voice-studio/dnd', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'addDnd'])->name('messaging.sms_voice_studio.add_dnd');
     Route::delete('api/messaging/sms-voice-studio/dnd/{suppressionUuid}', [\App\Http\Controllers\Messaging\SmsVoiceStudioController::class, 'removeDnd'])->name('messaging.sms_voice_studio.remove_dnd');
 
+    // AI Voice & Autonomous Automation Platform (P8)
+    Route::get('ai/voice-automation', [\App\Http\Controllers\Ai\VoiceAutomationController::class, 'index'])->name('ai.voice_automation');
+    Route::post('api/ai/voice-automation/simulate-turn', [\App\Http\Controllers\Ai\VoiceAutomationController::class, 'simulateTurn'])->name('ai.voice_automation.simulate_turn');
+    Route::post('api/ai/voice-automation/search-knowledge', [\App\Http\Controllers\Ai\VoiceAutomationController::class, 'searchKnowledge'])->name('ai.voice_automation.search_knowledge');
+    Route::post('api/ai/voice-automation/agents/{agentUuid}/prompt', [\App\Http\Controllers\Ai\VoiceAutomationController::class, 'updatePrompt'])->name('ai.voice_automation.update_prompt');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
