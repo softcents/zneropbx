@@ -198,10 +198,44 @@ class QaEvaluationService
     }
 
     /**
+     * Ensure default contact center agents exist for tenant.
+     */
+    public function ensureDefaultAgents(string $domainUuid): void
+    {
+        if (CallCenterAgents::where('domain_uuid', $domainUuid)->exists()) {
+            return;
+        }
+
+        $adminUser = \App\Models\User::first();
+
+        CallCenterAgents::create([
+            'call_center_agent_uuid' => (string) Str::uuid(),
+            'domain_uuid' => $domainUuid,
+            'user_uuid' => $adminUser?->user_uuid,
+            'agent_name' => 'Sarah Jenkins',
+            'agent_type' => 'callback',
+            'agent_id' => '1001',
+            'agent_status' => 'Available',
+        ]);
+
+        CallCenterAgents::create([
+            'call_center_agent_uuid' => (string) Str::uuid(),
+            'domain_uuid' => $domainUuid,
+            'user_uuid' => $adminUser?->user_uuid,
+            'agent_name' => 'David Miller',
+            'agent_type' => 'callback',
+            'agent_id' => '1002',
+            'agent_status' => 'Available',
+        ]);
+    }
+
+    /**
      * Get calls with recordings available for evaluation.
      */
     public function getCallsForEvaluation(string $domainUuid, int $limit = 30)
     {
+        $this->ensureDefaultAgents($domainUuid);
+
         // Ensure sample enterprise calls with audio intelligence exist
         app(SpeechIntelligenceService::class)->ensureSampleCallsWithRecordings($domainUuid);
 
