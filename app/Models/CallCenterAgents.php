@@ -75,4 +75,9 @@ class CallCenterAgents extends Model
         return $this->belongsTo(Extensions::class, 'agent_id', 'extension')
         ->where('domain_uuid', Session::get('domain_uuid'));
     }
+
+    public function agentSkills()
+    {
+        return $this->hasMany(ContactCenterAgentSkill::class, 'agent_uuid', 'call_center_agent_uuid');
+    }
 }
