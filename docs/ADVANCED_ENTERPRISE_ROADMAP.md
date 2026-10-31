@@ -179,3 +179,99 @@ For every feature:
 ## Immediate next action
 
 Perform the P0 repository audit and create a path-by-path feature matrix. Do not start a broad rewrite. Use verified findings to split each phase into small, reviewable pull requests.
+
+
+## P5A — Advanced Supervisor Command Center
+
+This is a first-class enterprise module, not merely an agent status page. Audit existing supervisor/contact-center pages and backend events first; extend existing components instead of duplicating them.
+
+### Supervisor roles and scope
+- Global Contact Center Admin, Operations Manager, Supervisor, Team Leader, QA Manager, WFM Manager, and read-only auditor roles.
+- Scope by tenant, site, campaign, queue, team, and shift; enforce scope in policies and backend queries.
+- Delegated supervisor access with time-bounded grants and complete audit history.
+
+### Live Operations Command Center
+- Real-time wallboard for active calls, waiting calls, longest wait, available/busy/wrap-up agents, service level, abandonment, answer rate, queue depth, and trunk/node health.
+- Drill-down from organization → site → campaign → queue → team → agent → interaction.
+- Configurable dashboards, saved layouts, wallboard display mode, date/time filters, and role-specific widgets.
+- Threshold alerts for SLA breach, queue overload, agent shortage, trunk failure, abnormal abandon rate, and system degradation.
+- Live event stream with reconnect, stale-data indicator, last-updated timestamp, and graceful degradation.
+
+### Live supervisor controls
+- Listen, whisper, barge, transfer, and conference controls only when supported by the FreeSWITCH feature path and authorized for that supervisor's scope.
+- Pause/resume campaigns, change campaign pacing within approved limits, move agents between eligible queues, and force logout only with reason and audit.
+- Queue overflow, callback activation, emergency routing profile, and incident-mode controls with approval policy.
+- Every privileged action must include permission check, confirmation, reason code, actor, target, timestamp, and result.
+
+### Agent performance and coaching
+- Live agent state timeline: login, ready, ringing, talking, hold, wrap-up, break, offline.
+- Per-agent and team KPIs: handled calls, offered calls, talk/hold/ACW time, occupancy, adherence, transfers, missed calls, CSAT and QA score where configured.
+- Coaching notes, one-to-one review, goals, improvement plans, acknowledgement, and history.
+- Fair comparisons normalized by queue, skill, shift, campaign, and interaction type; avoid misleading raw leaderboards.
+
+### SLA and queue intelligence
+- Configurable service-level targets and thresholds by queue/campaign/priority.
+- Real-time SLA forecast, wait-time estimate, abandon-risk indicators, and callback recommendations.
+- Queue priority, VIP routing, skill-based routing, overflow, business-hour/holiday rules, and capacity-aware assignment.
+- Historical interval reports and drill-down to interaction-level evidence.
+
+### QA and compliance workspace
+- Configurable scorecards, weighted criteria, critical-fail rules, sampling plans, evaluation assignment, calibration, dispute/appeal, and coaching follow-up.
+- Recording/transcript access gated by tenant, queue, role, retention policy, and legal basis.
+- Redaction and retention controls for sensitive data; access and playback audit.
+- Optional speech analytics and AI-assisted evaluation must show evidence and remain reviewable by a human.
+
+### Incident and alert management
+- Alert inbox, severity, acknowledgement, assignment, escalation, comments, resolution, and post-incident notes.
+- Alert deduplication, cooldown, escalation timers, and notification channel preferences.
+- Correlate telephony events with FreeSWITCH node, trunk, queue, agent, and campaign health.
+
+Acceptance criteria:
+- Supervisor cannot access queues, agents, recordings, or controls outside assigned scope.
+- Live dashboards show event freshness and recover correctly after websocket/network interruption.
+- All control actions are permission-checked and audit logged.
+- KPI definitions are documented and reconcile against source interaction/queue events.
+- Load tests validate expected concurrent supervisors, agents, and event throughput.
+
+## P5B — Advanced Agent Desktop and Omnichannel Contact Center
+
+### Unified agent workspace
+- Single desktop for voice, callback, SMS, WhatsApp, email, and web chat where each channel/provider is configured.
+- Customer 360 panel, interaction history, verified identity/context, CRM notes, dispositions, and next-best-action prompts.
+- Softphone controls, device diagnostics, network quality, mute/hold/transfer/conference, and reconnect recovery.
+- Configurable workspace layouts by team, campaign, and role.
+
+### Omnichannel routing
+- Unified interaction queue with channel-aware skills, priority, customer tier, language, business hours, and agent capacity.
+- Conversation continuity across channels with clear channel/source attribution.
+- Concurrency limits by channel and agent; prevent over-assignment.
+- Queue fairness, aging, SLA timers, callback scheduling, and overflow policies.
+
+### Campaign and dialer operations
+- Preview, progressive, and predictive dialer with pacing guardrails and real-time supervisor visibility.
+- Contact list validation, deduplication, timezone windows, consent/suppression lists, retry schedules, and disposition-based outcomes.
+- Abandonment controls, answering-machine detection where supported, and campaign pause triggers.
+- Campaign versioning, approvals, audit, and outcome analytics.
+
+### Workforce management
+- Skills matrix, shift templates, availability, leave, breaks, adherence, schedule publishing, and shift swaps.
+- Forecast staffing demand from historical interval volumes and configured service-level targets.
+- Intraday reforecast and supervisor recommendations; human approval for schedule changes.
+
+Acceptance criteria:
+- Agent assignment respects channel skills, concurrency, and capacity.
+- Interaction history and customer data remain tenant-isolated.
+- Dialer pacing and contact policies are enforced server-side.
+- Workforce forecasts disclose assumptions and can be reconciled to historical data.
+
+## Supervisor and Contact Center delivery order
+
+1. Audit current queue, agent-state, CDR, recording, event/broadcast, and contact-center code.
+2. Define canonical interaction and agent-state event contracts; avoid duplicate sources of truth.
+3. Deliver supervisor RBAC and scoped access before adding powerful controls.
+4. Deliver live operations dashboard and alerting.
+5. Deliver queue/agent control actions with audit trail.
+6. Deliver KPI definitions, reports, QA and coaching.
+7. Deliver agent desktop, omnichannel routing, dialer and WFM incrementally.
+
+Do not implement a control as a visual button unless its FreeSWITCH/API execution path, authorization, failure handling, and audit record are implemented and tested.
