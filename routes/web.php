@@ -386,6 +386,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/ivr-studio/{flow}/simulate', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'simulate'])->name('contact_center.ivr_studio.simulate');
     Route::get('api/contact-center/ivr-studio/{flow}/xml', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'exportXml'])->name('contact_center.ivr_studio.xml');
 
+    // Telecom Intelligence - Carrier Trunks, LCR & Routing Policies (P2)
+    Route::get('telecom/routing-intelligence', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'index'])->name('telecom.routing_intelligence');
+    Route::post('api/telecom/routing-intelligence/simulate', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'simulate'])->name('telecom.routing_intelligence.simulate');
+    Route::post('api/telecom/routing-intelligence/carriers/{carrier}/circuit-breaker', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'toggleCircuitBreaker'])->name('telecom.routing_intelligence.circuit_breaker');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

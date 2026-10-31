@@ -395,6 +395,9 @@
                                   <a href="/contact-center/ivr-studio" class="inline-flex items-center gap-1.5 rounded-lg bg-amber-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-600 transition">
                                       {{ $t('IVR Journey Studio') }}
                                   </a>
+                                  <a href="/telecom/routing-intelligence" class="inline-flex items-center gap-1.5 rounded-lg bg-teal-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-teal-600 transition">
+                                      {{ $t('Carrier LCR Studio') }}
+                                  </a>
                               </div>
                           </div>
                       </div>
