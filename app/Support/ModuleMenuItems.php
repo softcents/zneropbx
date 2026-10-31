@@ -42,8 +42,8 @@ class ModuleMenuItems
             ])
             ->values();
 
-        if (! $menu) {
-            return $menu;
+        if (empty($menu)) {
+            $menu = $this->buildFallbackMenu();
         }
 
         $menu = collect($menu)->map(fn ($top) => clone $top);
@@ -251,5 +251,76 @@ class ModuleMenuItems
             ->values();
 
         return $menu;
+    }
+
+    /**
+     * Fallback to construct top-level menu hierarchy from v_menu_items
+     * if session menu is empty or uninitialized.
+     */
+    public function buildFallbackMenu()
+    {
+        try {
+            $menuUuid = \Illuminate\Support\Facades\Session::get('user.menu_uuid');
+            if (! $menuUuid) {
+                $menuUuid = \Illuminate\Support\Facades\DB::table('v_menus')->where('menu_name', 'default')->value('menu_uuid')
+                    ?? \Illuminate\Support\Facades\DB::table('v_menus')->value('menu_uuid');
+            }
+
+            if (! $menuUuid) {
+                return collect([]);
+            }
+
+            $groupUuids = \Illuminate\Support\Facades\Session::get('user.group_uuids', []);
+
+            $topQuery = \Illuminate\Support\Facades\DB::table('v_menu_items')
+                ->where('v_menu_items.menu_uuid', '=', $menuUuid)
+                ->whereNull('v_menu_items.menu_item_parent_uuid');
+
+            if (! empty($groupUuids)) {
+                $topQuery->join('v_menu_item_groups', 'v_menu_item_groups.menu_item_uuid', '=', 'v_menu_items.menu_item_uuid')
+                    ->whereIn('v_menu_item_groups.group_uuid', $groupUuids)
+                    ->distinct();
+            }
+
+            $topItems = $topQuery->orderBy('v_menu_items.menu_item_order')
+                ->get([
+                    'v_menu_items.menu_item_uuid',
+                    'v_menu_items.menu_item_title',
+                    'v_menu_items.menu_item_link',
+                    'v_menu_items.menu_item_icon',
+                    'v_menu_items.menu_item_order',
+                ]);
+
+            foreach ($topItems as $item) {
+                $childQuery = \Illuminate\Support\Facades\DB::table('v_menu_items')
+                    ->where('v_menu_items.menu_uuid', '=', $menuUuid)
+                    ->where('v_menu_items.menu_item_parent_uuid', '=', $item->menu_item_uuid);
+
+                if (! empty($groupUuids)) {
+                    $childQuery->join('v_menu_item_groups', 'v_menu_item_groups.menu_item_uuid', '=', 'v_menu_items.menu_item_uuid')
+                        ->whereIn('v_menu_item_groups.group_uuid', $groupUuids)
+                        ->distinct();
+                }
+
+                $item->child_menu = $childQuery->orderBy('v_menu_items.menu_item_order')
+                    ->orderBy('v_menu_items.menu_item_title')
+                    ->get([
+                        'v_menu_items.menu_item_uuid',
+                        'v_menu_items.menu_item_title',
+                        'v_menu_items.menu_item_link',
+                        'v_menu_items.menu_item_icon',
+                        'v_menu_items.menu_item_order',
+                    ]);
+            }
+
+            if ($topItems->isNotEmpty()) {
+                \Illuminate\Support\Facades\Session::put('menu', $topItems);
+            }
+
+            return $topItems;
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('ModuleMenuItems fallback build failed: '.$e->getMessage());
+            return collect([]);
+        }
     }
 }
