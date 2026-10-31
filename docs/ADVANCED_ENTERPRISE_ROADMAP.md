@@ -275,3 +275,164 @@ Acceptance criteria:
 7. Deliver agent desktop, omnichannel routing, dialer and WFM incrementally.
 
 Do not implement a control as a visual button unless its FreeSWITCH/API execution path, authorization, failure handling, and audit record are implemented and tested.
+
+
+## P5C — Pro-Level Contact Center Capability Catalogue
+
+The following capabilities define the target product scope. They are roadmap requirements until each is audited and verified in code.
+
+### 1. ACD and intelligent interaction distribution
+- Multi-skill, multi-queue ACD with configurable skill proficiency, priority, proficiency decay, and routing strategy.
+- Longest-idle, round-robin, weighted, most-skilled, least-occupied, preferred-agent, and customer-affinity routing.
+- Queue priority classes, VIP/strategic-account handling, aging, starvation prevention, and fair distribution.
+- Agent capacity by channel and interaction complexity; voice concurrency must remain separately controlled.
+- Overflow trees across queues, sites, teams, schedules, and external destinations.
+- Callback offers based on wait-time threshold, estimated wait, queue pressure, and customer preference.
+- Queue exit, re-entry, timeout, retry, and no-agent policies with loop prevention.
+- Configurable announcements, estimated wait messaging, position announcements, music on hold, and multilingual prompts.
+- Queue simulation and routing policy preview before activation.
+
+### 2. Inbound contact center
+- Inbound number/DID to IVR, skill queue, campaign, service desk, branch, and business-hours routing.
+- Visual IVR and journey builder with reusable subflows, validation, versioning, testing, and rollback.
+- Speech-enabled IVR and DTMF fallback; caller language selection and locale-aware prompts.
+- Caller identification, CRM screen-pop, customer verification workflow, and priority lookup.
+- Emergency/priority queues, service outage announcements, callback, voicemail-to-ticket, and after-hours handling.
+- Repeat-caller recognition, previous interaction context, and configurable VIP treatment.
+- Inbound journey analytics: IVR containment, drop-off point, transfer rate, queue entry, and resolution.
+
+### 3. Outbound contact center and campaign studio
+- Campaign types: preview, progressive, predictive, power, agentless/IVR broadcast, scheduled callback, and blended inbound/outbound.
+- Campaign builder with list import, field mapping, validation, deduplication, segmentation, suppression, and approval.
+- Contact attempt strategy, retry windows, timezone/calendar rules, attempt caps, cooling periods, and disposition-based next action.
+- Pacing controls using available agents, answer rate, abandonment ceiling, average handle time, and campaign capacity.
+- Answering-machine detection and call progress analysis only where provider/FreeSWITCH support is verified.
+- Campaign pause/resume, emergency stop, throttling, drain, and automatic stop on configured risk/SLA thresholds.
+- Preview record, customer context, script, mandatory disclosures, and agent confirmation before dialing.
+- Campaign outcome, conversion, contactability, cost, revenue, and agent productivity analytics.
+
+### 4. Agent desktop and productivity tools
+- Unified interaction workspace with softphone, customer 360, CRM, knowledge base, scripts, forms, tasks, and disposition.
+- Screen-pop rules based on ANI/DNIS, account ID, ticket, campaign, or verified customer identity.
+- Dynamic scripts with branching, mandatory steps, disclosures, validation, and localized content.
+- Wrap-up/after-call work (ACW) policies, auto disposition suggestions, timers, and supervisor override with audit.
+- Warm transfer, blind transfer, consult, conference, callback scheduling, and interaction handoff.
+- Internal chat, team presence, supervisor assistance request, and knowledge article suggestions.
+- Browser/device/network diagnostics, microphone test, SIP registration status, WebRTC health, and reconnect recovery.
+- Accessibility, keyboard shortcuts, configurable layouts, and low-bandwidth mode.
+
+### 5. Quality management and interaction intelligence
+- Configurable manual QA scorecards, weighted criteria, critical errors, evaluator assignment, calibration, and appeals.
+- Random, risk-based, new-agent, campaign, and complaint-triggered sampling.
+- Screen recording only where explicitly supported and legally permitted; secure association with call recording and interaction record.
+- Speech analytics for silence, talk-over, hold, keywords, compliance phrases, sentiment signals, and conversation topics.
+- AI-generated summaries, disposition recommendations, coaching hints, and evaluation suggestions with evidence timestamps.
+- Human approval and override for AI-generated QA scores; model/version traceability and bias review.
+- Customer survey/CSAT, NPS, post-call IVR survey, complaint and resolution tracking.
+- Coaching plans, targeted training, follow-up evaluations, and measurable improvement history.
+
+### 6. Workforce management (WFM) and real-time adherence
+- Forecasting by interval, queue, skill, channel, seasonality, campaign, shrinkage, and service-level objective.
+- Staffing requirement calculation with disclosed assumptions and configurable service-level/occupancy targets.
+- Shift templates, rosters, skills matrix, leave, holidays, break planning, overtime, and shift swaps.
+- Schedule publishing, employee acknowledgement, schedule versioning, and manager approval.
+- Real-time adherence comparing scheduled state with actual agent state.
+- Intraday management: reforecast, staffing gap alerts, voluntary overtime requests, and queue reallocation recommendations.
+- What-if scenario planning for volume spikes, absenteeism, campaign launch, and service outages.
+- WFM audit trail and employee privacy controls.
+
+### 7. Customer experience and service management
+- Customer 360 profile with identity confidence, contact preferences, consent, account tier, open cases, and interaction history.
+- Case/ticket management with categories, priorities, ownership, SLA timers, escalation, internal notes, and resolution codes.
+- Complaint, escalation, callback promise, appointment, and follow-up task workflows.
+- Omnichannel conversation threading across voice, SMS, WhatsApp, email, and web chat where integrations exist.
+- Customer verification and sensitive-action workflows; never expose full payment credentials or secrets to agents.
+- Knowledge base with versioned articles, role/tenant visibility, search analytics, and feedback.
+- Customer feedback collection, survey triggers, detractor alerts, and closed-loop follow-up.
+- Consent and communication preference enforcement across campaign and agent workflows.
+
+### 8. Supervisor, operations and service governance
+- Multi-site command center with organization/site/queue/team/campaign/agent drill-down and saved views.
+- Live alerts for SLA, queue wait, abandonment, occupancy, staffing, trunk, node, recording, and integration failures.
+- Incident workflow: severity, owner, acknowledgement, escalation, timeline, notes, resolution, and postmortem.
+- Supervisor action approval matrix for campaign pacing, force logout, queue changes, emergency routing, and recording access.
+- Shift handover notes, operational announcements, maintenance windows, and supervisor checklist.
+- Threshold and anomaly rules with deduplication, cooldown, notification routing, and escalation policies.
+- KPI dictionary with formulas, time windows, exclusions, and data lineage to avoid conflicting dashboards.
+
+### 9. Omnichannel orchestration
+- Channel adapters for voice, callback, SMS, WhatsApp, email, and web chat; only enable a channel after provider integration is verified.
+- Unified interaction lifecycle with channel-specific state machines and correlation IDs.
+- Skills and priority routing across channels, channel concurrency limits, and workload weighting.
+- Conversation continuity and context handoff with customer consent and tenant isolation.
+- Channel-specific templates, delivery/read states, attachment controls, retry policy, and webhook observability.
+- Channel outage fallback and graceful degradation; do not silently mark undelivered interactions as complete.
+
+### 10. Enterprise administration and integration
+- Contact-center configuration templates, import/export, versioning, approval, staged publish, and rollback.
+- Tenant/site/department/campaign/queue/team hierarchy with scoped administration.
+- SSO/SAML/OIDC where supported by the existing auth architecture; MFA and session policy.
+- HR/CRM/helpdesk integration adapters, directory sync, event webhooks, and scheduled reconciliation.
+- Data warehouse/export integration with governed fields, access controls, and audit.
+- Configurable retention, legal hold, data export/deletion workflows, and recording access audit.
+- Multi-language, timezone, business calendar, and regional number formatting.
+
+### 11. Contact center reporting and analytics
+- Real-time, intraday, daily, monthly, and custom interval reports.
+- Standard metrics with documented formulas: SL, ASA, AHT, ATT, ACW, occupancy, utilization, adherence, abandonment, transfer, FCR, repeat contact, CSAT, NPS.
+- Inbound funnel: offered → IVR → queue → answered → transferred/resolved/abandoned.
+- Outbound funnel: eligible → attempted → connected → qualified → converted/declined.
+- Agent, team, queue, campaign, site, channel, skill, and customer segment dimensions.
+- Drill-through to authorized interaction records; exports must preserve tenant and role scopes.
+- Data freshness, late-arriving event handling, reconciliation, and report versioning.
+
+### 12. Reliability, scale and operational safeguards
+- Event-driven state updates with idempotent consumers, ordering strategy, replay capability, and dead-letter handling.
+- Backpressure, queue isolation, priority scheduling, retry budgets, and poison-message handling.
+- Websocket reconnect, snapshot resync, stale-state detection, and graceful polling fallback.
+- Capacity tests for concurrent agents, supervisors, calls, interactions, and event throughput.
+- Recording pipeline health, storage quota, retention jobs, transcription backlog, and alerting.
+- Per-tenant quotas, per-campaign pacing ceilings, circuit breakers, and safe global kill switches.
+- Observability for interaction lifecycle from ingress through routing, agent, recording, disposition, billing, and reporting.
+
+## P5D — Contact Center KPI Dictionary (initial definitions)
+
+All formulas must be configurable/documented and validated against source events. Do not mix incompatible denominator conventions.
+
+- Service Level (SL): answered eligible interactions within configured threshold / eligible offered interactions.
+- ASA: total queue wait time for answered interactions / answered interactions.
+- AHT: (talk + hold + after-call work) / handled interactions.
+- Abandon Rate: eligible customer abandons / eligible offered interactions, with short-abandon exclusions explicitly configured.
+- Occupancy: handling time / (handling time + available/idle time) for the chosen reporting definition.
+- Agent Adherence: time in scheduled state / total scheduled time.
+- First Contact Resolution (FCR): interactions resolved without qualifying repeat contact inside configured window / eligible resolved interactions.
+- Transfer Rate: handled interactions transferred / handled interactions.
+- Callback Fulfilment: completed callbacks / accepted callback requests.
+- QA Score: earned weighted score / applicable weighted score, with critical-fail handling reported separately.
+
+## P5E — Pro Contact Center non-functional requirements
+
+- Live operational data must expose event timestamp, ingestion timestamp, freshness, and stale/degraded state.
+- All supervisor actions must be authorized server-side, scoped, reason-coded where sensitive, and immutable-audited.
+- Recording/transcript/screen data must be encrypted where supported, access-controlled, retention-governed, and playback/export audited.
+- Customer consent, do-not-contact, quiet hours, local calling windows, and campaign restrictions must be enforced server-side.
+- Predictive dialing must have configurable abandonment guardrails, pacing ceilings, and immediate stop controls.
+- AI features must disclose confidence/limitations, retain model and prompt version provenance, and permit human review.
+- No feature may depend on a browser-only permission check or UI-only limit.
+- Preserve current stack and deployment: Laravel/PHP, Vue 3 + Inertia.js, existing database, Redis, Laravel Queue/Horizon, FreeSWITCH, Nginx, and aaPanel.
+
+## P5F — Pro Contact Center implementation sequence
+
+1. Source audit and feature matrix for current queues, agents, events, recordings, IVR, dialer, CRM, and reports.
+2. Canonical interaction/agent state contracts, KPI dictionary, tenant scope, and RBAC.
+3. ACD routing and queue policy engine with simulation and test fixtures.
+4. Agent desktop foundations and reliable real-time state.
+5. Supervisor command center, alerting, and audited controls.
+6. Inbound IVR/journey and callback workflows.
+7. Outbound campaign studio and safe dialer pacing.
+8. QA, recording governance, coaching, and customer feedback.
+9. Omnichannel adapters and unified interaction history.
+10. WFM forecasting, scheduling, and adherence.
+11. Analytics, load tests, failover tests, and production readiness.
+
+Each step must be audited against existing code before implementation. Existing working functionality must be reused, not duplicated.
