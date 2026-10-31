@@ -211,6 +211,8 @@ class Kernel extends ConsoleKernel
         Commands\SimulateEnterpriseWorkflows::class,
         Commands\BenchmarkEnterprisePlatform::class,
         Commands\TelecomLiveStressTest::class,
+        Commands\StirShakenSignCallCommand::class,
+        Commands\StirShakenTestCommand::class,
     ];
 
     protected function commands()

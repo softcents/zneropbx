@@ -391,6 +391,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/telecom/routing-intelligence/simulate', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'simulate'])->name('telecom.routing_intelligence.simulate');
     Route::post('api/telecom/routing-intelligence/carriers/{carrier}/circuit-breaker', [\App\Http\Controllers\Telecom\RoutingIntelligenceController::class, 'toggleCircuitBreaker'])->name('telecom.routing_intelligence.circuit_breaker');
 
+    // STIR/SHAKEN Caller Identity, Cryptographic PASSporT & Attestation Engine
+    Route::get('telecom/stir-shaken', [\App\Http\Controllers\Telecom\StirShakenController::class, 'index'])->name('telecom.stir_shaken');
+    Route::post('api/telecom/stir-shaken/generate-cert', [\App\Http\Controllers\Telecom\StirShakenController::class, 'generateCertificate'])->name('telecom.stir_shaken.generate_cert');
+    Route::post('api/telecom/stir-shaken/simulate-signing', [\App\Http\Controllers\Telecom\StirShakenController::class, 'simulateSigning'])->name('telecom.stir_shaken.simulate_signing');
+    Route::post('api/telecom/stir-shaken/verify-passport', [\App\Http\Controllers\Telecom\StirShakenController::class, 'verifyPassport'])->name('telecom.stir_shaken.verify_passport');
+
     // Financial Rating, Double-Entry Ledger & Billing Studio (P3)
     Route::get('billing/financial-studio', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'index'])->name('billing.financial_studio');
     Route::post('api/billing/financial-studio/simulate', [\App\Http\Controllers\Billing\FinancialStudioController::class, 'simulate'])->name('billing.financial_studio.simulate');
