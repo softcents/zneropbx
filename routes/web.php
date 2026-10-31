@@ -378,6 +378,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/omnichannel/{conversation}/status', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'updateStatus'])->name('contact_center.omnichannel.status');
     Route::post('api/contact-center/omnichannel/simulate', [\App\Http\Controllers\ContactCenter\OmnichannelController::class, 'simulateInbound'])->name('contact_center.omnichannel.simulate');
 
+    // Advanced Contact Center - Inbound IVR Journey Studio
+    Route::get('contact-center/ivr-studio', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'index'])->name('contact_center.ivr_studio');
+    Route::post('api/contact-center/ivr-studio', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'store'])->name('contact_center.ivr_studio.store');
+    Route::patch('api/contact-center/ivr-studio/{flow}', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'update'])->name('contact_center.ivr_studio.update');
+    Route::post('api/contact-center/ivr-studio/{flow}/simulate', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'simulate'])->name('contact_center.ivr_studio.simulate');
+    Route::get('api/contact-center/ivr-studio/{flow}/xml', [\App\Http\Controllers\ContactCenter\IvrStudioController::class, 'exportXml'])->name('contact_center.ivr_studio.xml');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

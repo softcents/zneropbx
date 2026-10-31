@@ -113,6 +113,13 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 9,
             ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/ivr-studio',
+                'menu_item_title' => __('Inbound IVR Journey Studio'),
+                'menu_item_link' => '/contact-center/ivr-studio',
+                'menu_item_icon' => null,
+                'menu_item_order' => 10,
+            ],
         ]);
 
         if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Contact Center') || ($top->menu_item_title ?? '') === 'Contact Center')) {

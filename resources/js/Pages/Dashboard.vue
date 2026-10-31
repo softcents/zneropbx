@@ -392,6 +392,9 @@
                                   <a href="/contact-center/omnichannel" class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-emerald-600 transition">
                                       {{ $t('Omnichannel Hub') }}
                                   </a>
+                                  <a href="/contact-center/ivr-studio" class="inline-flex items-center gap-1.5 rounded-lg bg-amber-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-amber-600 transition">
+                                      {{ $t('IVR Journey Studio') }}
+                                  </a>
                               </div>
                           </div>
                       </div>
