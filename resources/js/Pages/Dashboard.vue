@@ -351,6 +351,36 @@
 
                     <!-- Quick Access -->
                     <div class="lg:col-span-2 lg:row-span-2 lg:row-end-2 space-y-6">
+                      <!-- Advanced Enterprise Contact Center Spotlight Banner -->
+                      <div class="overflow-hidden rounded-xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 p-5 text-white shadow-md ring-1 ring-white/10">
+                          <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                              <div>
+                                  <div class="flex items-center gap-2">
+                                      <span class="inline-flex h-2.5 w-2.5 animate-pulse rounded-full bg-emerald-400"></span>
+                                      <span class="text-xs font-semibold tracking-wider uppercase text-cyan-400">{{ $t('Advanced Enterprise Contact Center') }}</span>
+                                  </div>
+                                  <h2 class="mt-1 text-lg font-bold tracking-tight text-white">{{ $t('Supervisor Command Center & Omni-Agent Suite') }}</h2>
+                                  <p class="mt-0.5 text-xs text-slate-300 max-w-xl">
+                                      {{ $t('Real-time queue analytics, live call intervention (Listen, Whisper, Barge), Omnichannel Desktop, QA Scorecards, and Erlang-C Workforce Management.') }}
+                                  </p>
+                              </div>
+                              <div class="flex flex-wrap items-center gap-2">
+                                  <a href="/contact-center/supervisor-command-center" class="inline-flex items-center gap-1.5 rounded-lg bg-cyan-600 px-3 py-2 text-xs font-bold text-white shadow hover:bg-cyan-500 transition">
+                                      {{ $t('Supervisor Center') }}
+                                  </a>
+                                  <a href="/contact-center/agent-desktop" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-white hover:bg-white/20 transition">
+                                      {{ $t('Agent Desktop') }}
+                                  </a>
+                                  <a href="/contact-center/qa-evaluation" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-white hover:bg-white/20 transition">
+                                      {{ $t('QA & Coaching') }}
+                                  </a>
+                                  <a href="/contact-center/workforce-management" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-white hover:bg-white/20 transition">
+                                      {{ $t('WFM') }}
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+
                       <div>
                         <div class="flex items-center justify-between">
                             <h2 class="text-base font-semibold leading-6 text-gray-950">{{ $t('Quick Access') }}</h2>

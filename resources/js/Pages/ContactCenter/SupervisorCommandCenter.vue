@@ -1,7 +1,6 @@
 <template>
-    <MainLayout />
-
-    <div class="m-3 space-y-4">
+    <MainLayout>
+        <div class="m-3 space-y-4">
         <!-- Header & Top Navigation -->
         <div class="flex flex-wrap items-center justify-between gap-4 rounded-xl bg-white p-4 shadow-sm ring-1 ring-gray-200">
             <div>
@@ -480,7 +479,8 @@
                 </div>
             </div>
         </div>
-    </div>
+        </div>
+    </MainLayout>
 </template>
 
 <script setup>
