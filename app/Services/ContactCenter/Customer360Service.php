@@ -246,10 +246,13 @@ class Customer360Service
             return null;
         }
 
+        $searchDigits = strlen($clean) > 7 ? substr($clean, -7) : $clean;
+
         $customer = ContactCenterCustomer::where('domain_uuid', $domainUuid)
-            ->where(function ($q) use ($phone, $clean) {
-                $q->where('phone', 'like', "%{$clean}%")
-                    ->orWhere('phone', 'like', "%{$phone}%");
+            ->where(function ($q) use ($phone, $clean, $searchDigits) {
+                $q->where('phone', 'like', "%{$phone}%")
+                    ->orWhereRaw("regexp_replace(phone, '[^0-9]', '', 'g') LIKE ?", ["%{$clean}%"])
+                    ->orWhereRaw("regexp_replace(phone, '[^0-9]', '', 'g') LIKE ?", ["%{$searchDigits}%"]);
             })
             ->withCount(['tickets' => fn ($q) => $q->whereIn('status', ['open', 'in_progress'])])
             ->first();
