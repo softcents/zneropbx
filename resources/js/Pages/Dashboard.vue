@@ -380,6 +380,9 @@
                                   <a href="/contact-center/campaigns" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-white hover:bg-white/20 transition">
                                       {{ $t('Dialer Studio') }}
                                   </a>
+                                  <a href="/contact-center/routing" class="inline-flex items-center gap-1.5 rounded-lg bg-white/10 px-3 py-2 text-xs font-medium text-white hover:bg-white/20 transition">
+                                      {{ $t('ACD & Skills') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

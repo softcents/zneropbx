@@ -348,6 +348,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('api/contact-center/campaigns/{campaign}/leads', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'addLeads'])->name('contact_center.campaigns.leads');
     Route::get('api/contact-center/campaigns/{campaign}/telemetry', [\App\Http\Controllers\ContactCenter\CampaignStudioController::class, 'telemetry'])->name('contact_center.campaigns.telemetry');
 
+    // Advanced Contact Center - Skills-Based Routing & ACD Intelligence
+    Route::get('contact-center/routing', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'index'])->name('contact_center.routing');
+    Route::post('api/contact-center/routing/skills', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'saveSkill'])->name('contact_center.routing.skills.save');
+    Route::delete('api/contact-center/routing/skills/{skill}', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'deleteSkill'])->name('contact_center.routing.skills.delete');
+    Route::post('api/contact-center/routing/agent-skills', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'updateAgentSkills'])->name('contact_center.routing.agent_skills.update');
+    Route::post('api/contact-center/routing/queue-policy', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'saveQueuePolicy'])->name('contact_center.routing.queue_policy.save');
+    Route::post('api/contact-center/routing/callbacks/{callback}/action', [\App\Http\Controllers\ContactCenter\AcdRoutingController::class, 'callbackAction'])->name('contact_center.routing.callbacks.action');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

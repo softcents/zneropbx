@@ -586,6 +586,13 @@ class DashboardController extends Controller
             'slug' => 'campaign_studio',
             'count_label' => __('Predictive'),
         ];
+        $apps[] = [
+            'name' => __('ACD & Skills Routing'),
+            'href' => '/contact-center/routing',
+            'icon' => 'SupportAgent',
+            'slug' => 'acd_routing',
+            'count_label' => __('Skills & SLA'),
+        ];
 
         if (userCheckPermission("extension_view")) {
             $apps[] = ['name' => __('Extensions'), 'href' => route('extensions.index'), 'icon' => 'ContactPhoneIcon', 'slug' => 'extensions'];

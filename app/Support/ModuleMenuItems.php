@@ -85,6 +85,13 @@ class ModuleMenuItems
                 'menu_item_icon' => null,
                 'menu_item_order' => 5,
             ],
+            (object) [
+                'menu_item_uuid' => 'module:/contact-center/routing',
+                'menu_item_title' => __('ACD & Skills Routing'),
+                'menu_item_link' => '/contact-center/routing',
+                'menu_item_icon' => null,
+                'menu_item_order' => 6,
+            ],
         ]);
 
         if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Contact Center') || ($top->menu_item_title ?? '') === 'Contact Center')) {
