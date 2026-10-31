@@ -416,6 +416,9 @@
                                   <a href="/api-ecosystem/developer-portal" class="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-indigo-600 transition">
                                       {{ $t('Developer Portal & APIs') }}
                                   </a>
+                                  <a href="/security/fraud-compliance-studio" class="inline-flex items-center gap-1.5 rounded-lg bg-rose-600/80 px-3 py-2 text-xs font-semibold text-white hover:bg-rose-600 transition">
+                                      {{ $t('Fraud & Security Shield') }}
+                                  </a>
                               </div>
                           </div>
                       </div>

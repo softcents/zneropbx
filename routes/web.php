@@ -435,6 +435,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('api/ecosystem/webhooks/{uuid}', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'deleteWebhook'])->name('api_ecosystem.webhooks.delete');
     Route::post('api/ecosystem/webhooks/{uuid}/test', [\App\Http\Controllers\Api\DeveloperPortalController::class, 'testWebhook'])->name('api_ecosystem.webhooks.test');
 
+    // Security, Fraud Detection & Regulatory Compliance Studio (P10)
+    Route::get('security/fraud-compliance-studio', [\App\Http\Controllers\Security\FraudComplianceController::class, 'index'])->name('security.fraud_compliance_studio');
+    Route::post('api/security/fraud-rules', [\App\Http\Controllers\Security\FraudComplianceController::class, 'storeRule'])->name('security.fraud_rules.store');
+    Route::post('api/security/fraud-rules/{uuid}/toggle', [\App\Http\Controllers\Security\FraudComplianceController::class, 'toggleRule'])->name('security.fraud_rules.toggle');
+    Route::post('api/security/ip-quarantine', [\App\Http\Controllers\Security\FraudComplianceController::class, 'quarantineIp'])->name('security.ip_quarantine.store');
+    Route::post('api/security/ip-quarantine/{uuid}/unquarantine', [\App\Http\Controllers\Security\FraudComplianceController::class, 'unquarantineIp'])->name('security.ip_quarantine.unquarantine');
+    Route::post('api/security/simulate-threat-evaluation', [\App\Http\Controllers\Security\FraudComplianceController::class, 'simulateThreat'])->name('security.simulate_threat');
+    Route::post('api/security/incidents/{uuid}/resolve', [\App\Http\Controllers\Security\FraudComplianceController::class, 'resolveIncident'])->name('security.incidents.resolve');
+    Route::post('api/security/compliance-policy', [\App\Http\Controllers\Security\FraudComplianceController::class, 'updatePolicy'])->name('security.compliance_policy.update');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 
