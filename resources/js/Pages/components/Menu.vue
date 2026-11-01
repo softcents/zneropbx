@@ -1,5 +1,16 @@
 <template>
     <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
+        <!-- Global Ghost Impersonation Notification Bar -->
+        <div v-if="page.props.isImpersonating" class="bg-amber-500 text-white px-4 py-2 text-xs flex items-center justify-between font-nunito shadow-xs">
+            <div class="flex items-center gap-2">
+                <span class="font-bold uppercase tracking-wider bg-amber-600 px-2 py-0.5 rounded text-[10px]">⚡ GHOST MODE ACTIVE</span>
+                <span>You are impersonating: <strong>{{ page.props.selectedDomain || 'Tenant Organization' }}</strong></span>
+            </div>
+            <a href="/superadmin/control-suite" class="underline hover:text-amber-100 font-bold ml-4">
+                Open Superadmin Suite / Exit Ghost Mode →
+            </a>
+        </div>
+
         <div class="mx-auto max-w-9xl px-4 sm:px-6 lg:px-8">
             <div class="flex h-16 justify-between">
                 <div class="flex">

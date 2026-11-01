@@ -282,6 +282,65 @@ class ModuleMenuItems
             ]);
         }
 
+        // Master Superadmin Platform Owner Control Suite
+        if (function_exists('isSuperAdmin') && isSuperAdmin()) {
+            $superadminChildren = collect([
+                (object) [
+                    'menu_item_uuid' => 'module:/superadmin/control-suite?tab=fleet',
+                    'menu_item_title' => __('Fleet & Ghost Impersonate'),
+                    'menu_item_link' => '/superadmin/control-suite?tab=fleet',
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 1,
+                ],
+                (object) [
+                    'menu_item_uuid' => 'module:/superadmin/control-suite?tab=warehouse',
+                    'menu_item_title' => __('Global DID Warehouse'),
+                    'menu_item_link' => '/superadmin/control-suite?tab=warehouse',
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 2,
+                ],
+                (object) [
+                    'menu_item_uuid' => 'module:/superadmin/control-suite?tab=trunks',
+                    'menu_item_title' => __('Carrier Gateways & SIP Pools'),
+                    'menu_item_link' => '/superadmin/control-suite?tab=trunks',
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 3,
+                ],
+                (object) [
+                    'menu_item_uuid' => 'module:/superadmin/control-suite?tab=packages',
+                    'menu_item_title' => __('SaaS Packages & Entitlements'),
+                    'menu_item_link' => '/superadmin/control-suite?tab=packages',
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 4,
+                ],
+                (object) [
+                    'menu_item_uuid' => 'module:/superadmin/control-suite?tab=panic',
+                    'menu_item_title' => __('Panic Switches & Fraud Radar'),
+                    'menu_item_link' => '/superadmin/control-suite?tab=panic',
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 5,
+                ],
+                (object) [
+                    'menu_item_uuid' => 'module:/superadmin/control-suite?tab=audit',
+                    'menu_item_title' => __('Cross-Tenant Audit Trail'),
+                    'menu_item_link' => '/superadmin/control-suite?tab=audit',
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 6,
+                ],
+            ]);
+
+            if (! $menu->contains(fn ($top) => ($top->menu_item_title ?? '') === __('Superadmin Suite') || ($top->menu_item_title ?? '') === 'Superadmin Suite')) {
+                $menu->push((object) [
+                    'menu_item_uuid' => 'module:superadmin-suite',
+                    'menu_item_title' => __('Superadmin Suite'),
+                    'menu_item_link' => null,
+                    'menu_item_icon' => null,
+                    'menu_item_order' => 53,
+                    'child_menu' => $superadminChildren,
+                ]);
+            }
+        }
+
         if ($entries->isEmpty()) {
             return $menu;
         }

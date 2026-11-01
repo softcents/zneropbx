@@ -475,6 +475,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('reseller/whitelabel/tenants/{uuid}', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'updateTenant'])->name('reseller.whitelabel.update-tenant');
     Route::delete('reseller/whitelabel/tenants/{uuid}', [\App\Http\Controllers\Reseller\ResellerWhitelabelController::class, 'deleteTenant'])->name('reseller.whitelabel.delete-tenant');
 
+    // Superadmin Platform Owner Mission Control Suite (Fleet Impersonation, DID Warehouse, SaaS Packaging & Panic Radar)
+    Route::get('superadmin/control-suite', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'index'])->name('superadmin.control-suite');
+    Route::post('superadmin/impersonate/{domain_uuid}', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'impersonateTenant'])->name('superadmin.impersonate');
+    Route::post('superadmin/stop-impersonate', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'stopImpersonating'])->name('superadmin.stop-impersonate');
+    Route::post('superadmin/toggle-tenant-status/{domain_uuid}', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'toggleTenantStatus'])->name('superadmin.toggle-tenant-status');
+    Route::post('superadmin/update-entitlements/{domain_uuid}', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'updateEntitlements'])->name('superadmin.update-entitlements');
+    Route::post('superadmin/warehouse/allocate', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'allocateWarehouseDid'])->name('superadmin.warehouse.allocate');
+    Route::post('superadmin/warehouse/reclaim/{id}', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'reclaimWarehouseDid'])->name('superadmin.warehouse.reclaim');
+    Route::post('superadmin/warehouse/store', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'storeWarehouseDid'])->name('superadmin.warehouse.store');
+    Route::post('superadmin/panic-switch', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'triggerPanicSwitch'])->name('superadmin.panic-switch');
+    Route::post('superadmin/broadcast-notice', [\App\Http\Controllers\Superadmin\SuperadminControlSuiteController::class, 'broadcastNotice'])->name('superadmin.broadcast-notice');
+
     // Basic Dialer
     Route::get('basic-dialer', [BasicDialerController::class, 'index'])->name('basic-dialer.index');
 

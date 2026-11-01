@@ -67,6 +67,10 @@ class HandleInertiaRequests extends Middleware
 
             'whitelabel' => fn() => app(\App\Services\WhiteLabelService::class)->current(),
 
+            'isSuperAdmin' => fn() => function_exists('isSuperAdmin') ? isSuperAdmin() : false,
+
+            'isImpersonating' => fn() => Session::has('superadmin_impersonator_id'),
+
             'auth' => [
                 'user' => fn() => $request->user() ? [
                     'name'  => $request->user()->name_formatted ?: $request->user()->username,
