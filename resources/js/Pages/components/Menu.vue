@@ -1,7 +1,7 @@
 <template>
     <Disclosure as="nav" class="bg-white shadow" v-slot="{ open }">
         <!-- Global Ghost Impersonation Notification Bar -->
-        <div v-if="page.props.isImpersonating" class="bg-amber-500 text-white px-4 py-2 text-xs flex items-center justify-between font-nunito shadow-xs">
+        <div v-if="page.props.isImpersonating" class="bg-amber-500 text-white px-4 py-2 text-xs flex items-center justify-between font-sans shadow-xs">
             <div class="flex items-center gap-2">
                 <span class="font-bold uppercase tracking-wider bg-amber-600 px-2 py-0.5 rounded text-[10px]">⚡ GHOST MODE ACTIVE</span>
                 <span>You are impersonating: <strong>{{ page.props.selectedDomain || 'Tenant Organization' }}</strong></span>
@@ -36,7 +36,7 @@
                                 <MenuButton
                                     class="inline-flex border-none text-sm font-medium text-gray-500 hover:text-gray-700 cursor-pointer focus:outline-none">
 
-                                    <div class="font-nunito text-sm">{{ item.menu_item_title }}</div>
+                                    <div class="font-sans text-sm">{{ item.menu_item_title }}</div>
                                     <ChevronDownIcon class="h-5 w-5" />
                                 </MenuButton>
 
@@ -64,7 +64,7 @@
                             <!-- Direct link when no children -->
                             <a v-else :href="item.menu_item_link || '#'"
                                 class="inline-flex border-none text-sm font-medium text-gray-500 hover:text-gray-700 cursor-pointer no-underline">
-                                <div class="font-nunito text-sm">{{ item.menu_item_title }}</div>
+                                <div class="font-sans text-sm">{{ item.menu_item_title }}</div>
                             </a>
                         </div>
                     </div>

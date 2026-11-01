@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div class="m-3 space-y-6 font-nunito">
+    <div class="m-3 space-y-6 font-sans antialiased text-gray-900">
       <!-- Ghost Mode Active Banner (If Superadmin is currently impersonating a tenant) -->
       <div
         v-if="isImpersonating"

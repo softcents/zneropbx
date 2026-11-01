@@ -1,6 +1,6 @@
 <template>
   <MainLayout>
-    <div class="m-3 space-y-6 font-nunito">
+    <div class="m-3 space-y-6 font-sans antialiased text-gray-900">
       <!-- Top Studio Header -->
       <div class="bg-white rounded-lg shadow-sm ring-1 ring-gray-200 p-5">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
